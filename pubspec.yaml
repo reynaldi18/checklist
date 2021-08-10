@@ -45,7 +45,6 @@ dependencies:
 
   # navigation
   stacked_services: ^0.8.13
-  get_it: ^7.2.0
 
   # network
   connectivity: ^3.0.6
@@ -78,7 +77,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^2.1.0
+  build_runner: ^2.1.1
   stacked_generator: any
   retrofit_generator: any
   json_serializable: any

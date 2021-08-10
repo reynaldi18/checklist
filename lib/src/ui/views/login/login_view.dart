@@ -62,7 +62,7 @@ class LoginView extends StatelessWidget {
                     verticalSpace(SDP.sdp(24)),
                     vm.isBusy == true
                         ? SpinKitFadingCircle(
-                            size: SDP.sdp(buttonHeight),
+                            size: SDP.sdp(defaultSize),
                             color: mainColor,
                           )
                         : CustomButton(

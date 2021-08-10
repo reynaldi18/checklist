@@ -15,7 +15,7 @@ class MyApp extends StatelessWidget {
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       navigatorKey: StackedService.navigatorKey,
-      onGenerateRoute: StackedRouter(),
+      onGenerateRoute: StackedRouter().onGenerateRoute,
     );
   }
 }

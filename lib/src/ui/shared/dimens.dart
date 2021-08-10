@@ -10,6 +10,7 @@ final double fontHint = 12.0;
 final double fontNavBar = 12.0;
 
 // SIZE
+final double defaultSize = 32.0;
 final double defaultPadding = 24.0;
 final double buttonHeight = 36.0;
 final double buttonMediaSocialWidth = 143.0;

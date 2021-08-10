@@ -23,94 +23,92 @@ class _MainViewState extends State<MainView> {
   Widget build(BuildContext context) {
     SDP.init(context);
     return ViewModelBuilder<MainViewModel>.reactive(
-      builder: (context, vm, child) => Container(
-        child: Scaffold(
-          body: PageTransitionSwitcher(
-            duration: const Duration(milliseconds: 300),
-            reverse: vm.reverse,
-            transitionBuilder: (
-              Widget child,
-              Animation<double> animation,
-              Animation<double> secondaryAnimation,
-            ) {
-              return SharedAxisTransition(
-                child: child,
-                animation: animation,
-                secondaryAnimation: secondaryAnimation,
-                transitionType: SharedAxisTransitionType.horizontal,
-              );
-            },
-            child: getViewForIndex(vm.currentIndex),
-          ),
-          bottomNavigationBar: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: white,
-            currentIndex: vm.currentIndex,
-            selectedItemColor: mainColor,
-            unselectedItemColor: black,
-            selectedFontSize: SDP.sdp(12),
-            unselectedFontSize: SDP.sdp(12),
-            onTap: vm.setIndex,
-            items: [
-              BottomNavigationBarItem(
-                label: Strings.labelHome,
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    iconHome,
-                    width: SDP.sdp(iconSize),
-                    color: black,
-                  ),
-                ),
-                activeIcon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    iconHome,
-                    width: SDP.sdp(iconSize),
-                    color: mainColor,
-                  ),
+      builder: (context, vm, child) => Scaffold(
+        body: PageTransitionSwitcher(
+          duration: const Duration(milliseconds: 300),
+          reverse: vm.reverse,
+          transitionBuilder: (
+            Widget child,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) {
+            return SharedAxisTransition(
+              child: child,
+              animation: animation,
+              secondaryAnimation: secondaryAnimation,
+              transitionType: SharedAxisTransitionType.horizontal,
+            );
+          },
+          child: getViewForIndex(vm.currentIndex),
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: white,
+          currentIndex: vm.currentIndex,
+          selectedItemColor: mainColor,
+          unselectedItemColor: black,
+          selectedFontSize: SDP.sdp(12),
+          unselectedFontSize: SDP.sdp(12),
+          onTap: vm.setIndex,
+          items: [
+            BottomNavigationBarItem(
+              label: Strings.labelHome,
+              icon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  iconHome,
+                  width: SDP.sdp(iconSize),
+                  color: black,
                 ),
               ),
-              BottomNavigationBarItem(
-                label: Strings.labelHistory,
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    iconHistory,
-                    width: SDP.sdp(iconSize),
-                    color: black,
-                  ),
-                ),
-                activeIcon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    iconHistory,
-                    width: SDP.sdp(iconSize),
-                    color: mainColor,
-                  ),
+              activeIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  iconHome,
+                  width: SDP.sdp(iconSize),
+                  color: mainColor,
                 ),
               ),
-              BottomNavigationBarItem(
-                label: Strings.labelAccount,
-                icon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    iconAccount,
-                    width: SDP.sdp(iconSize),
-                    color: black,
-                  ),
-                ),
-                activeIcon: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: SvgPicture.asset(
-                    iconAccount,
-                    width: SDP.sdp(iconSize),
-                    color: mainColor,
-                  ),
+            ),
+            BottomNavigationBarItem(
+              label: Strings.labelHistory,
+              icon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  iconHistory,
+                  width: SDP.sdp(iconSize),
+                  color: black,
                 ),
               ),
-            ],
-          ),
+              activeIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  iconHistory,
+                  width: SDP.sdp(iconSize),
+                  color: mainColor,
+                ),
+              ),
+            ),
+            BottomNavigationBarItem(
+              label: Strings.labelAccount,
+              icon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  iconAccount,
+                  width: SDP.sdp(iconSize),
+                  color: black,
+                ),
+              ),
+              activeIcon: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset(
+                  iconAccount,
+                  width: SDP.sdp(iconSize),
+                  color: mainColor,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       viewModelBuilder: () => MainViewModel(),

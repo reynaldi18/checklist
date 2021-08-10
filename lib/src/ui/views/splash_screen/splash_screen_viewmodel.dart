@@ -1,7 +1,7 @@
 import 'dart:async';
 
+import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/app/app.router.dart';
-import 'package:si_jaja/src/injector/injector.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
