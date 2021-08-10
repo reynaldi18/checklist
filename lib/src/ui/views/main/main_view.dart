@@ -54,7 +54,7 @@ class _MainViewState extends State<MainView> {
             BottomNavigationBarItem(
               label: Strings.labelHome,
               icon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(SDP.sdp(8)),
                 child: SvgPicture.asset(
                   iconHome,
                   width: SDP.sdp(iconSize),
@@ -62,7 +62,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               activeIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(SDP.sdp(8)),
                 child: SvgPicture.asset(
                   iconHome,
                   width: SDP.sdp(iconSize),
@@ -73,7 +73,7 @@ class _MainViewState extends State<MainView> {
             BottomNavigationBarItem(
               label: Strings.labelHistory,
               icon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(SDP.sdp(8)),
                 child: SvgPicture.asset(
                   iconHistory,
                   width: SDP.sdp(iconSize),
@@ -81,7 +81,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               activeIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(SDP.sdp(8)),
                 child: SvgPicture.asset(
                   iconHistory,
                   width: SDP.sdp(iconSize),
@@ -92,7 +92,7 @@ class _MainViewState extends State<MainView> {
             BottomNavigationBarItem(
               label: Strings.labelAccount,
               icon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(SDP.sdp(8)),
                 child: SvgPicture.asset(
                   iconAccount,
                   width: SDP.sdp(iconSize),
@@ -100,7 +100,7 @@ class _MainViewState extends State<MainView> {
                 ),
               ),
               activeIcon: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: EdgeInsets.all(SDP.sdp(8)),
                 child: SvgPicture.asset(
                   iconAccount,
                   width: SDP.sdp(iconSize),

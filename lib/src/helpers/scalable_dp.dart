@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:si_jaja/src/helpers/responsive.dart';
 
 class SDP {
   static int? dimen;
@@ -14,11 +13,14 @@ class SDP {
   }
 
   static double sdp(double dp) {
-    var size = Responsive.isDesktop(context!)
+    bool desktop = width! >= 1024;
+    bool tablet = width! >= 700;
+    bool mobileLarge = width! >= 500;
+    var size = desktop
         ? (dp / 900) * height!
-        : Responsive.isTablet(context!)
+        : tablet
             ? (dp / 700) * height!
-            : Responsive.isMobileLarge(context!)
+            : mobileLarge
                 ? (dp / 500) * height!
                 : (dp / 300) * width!;
     return size;
