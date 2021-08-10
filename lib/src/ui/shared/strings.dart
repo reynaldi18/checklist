@@ -3,7 +3,7 @@ class Strings {
   static const String APP_STORE_URL = '';
   static const String PLAY_STORE_URL = '';
 
-  static const String labelApp = 'SI Jaja';
+  static const String labelApp = 'SI Bang Jaja';
   static const String labelLoginMediaSocial = 'Atau Masuk dengan';
   static const String labelVerification = 'Verifikasi';
   static const String labelHome = 'Beranda';
