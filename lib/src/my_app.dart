@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:si_jaja/src/app/app.router.dart';
+import 'package:si_jaja/src/ui/shared/styles.dart';
 import 'package:stacked_services/stacked_services.dart';
 
 class MyApp extends StatelessWidget {
@@ -7,9 +9,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+          statusBarColor: mainColor, // this one for android
+          statusBarBrightness: Brightness.light // this one for iOS
+      ),
+    );
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'SI Jaja',
+      title: 'SI Bang Jaja',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,

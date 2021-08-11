@@ -45,6 +45,7 @@ dependencies:
 
   # navigation
   stacked_services: ^0.8.13
+  get_it: ^7.2.0
 
   # network
   connectivity: ^3.0.6

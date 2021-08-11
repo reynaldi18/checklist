@@ -10,7 +10,6 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../helpers/storage/shared_preferences_manager.dart';
 import '../services/user_service.dart';
 
 final locator = StackedLocator.instance;
@@ -26,5 +25,4 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => UserService());
-  locator.registerSingleton(SharedPreferencesManager());
 }

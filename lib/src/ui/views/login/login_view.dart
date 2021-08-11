@@ -67,7 +67,10 @@ class LoginView extends StatelessWidget {
                           )
                         : CustomButton(
                             label: Strings.actionLogin.toUpperCase(),
-                            onPress: () => vm.login(),
+                            onPress: () {
+                              FocusScope.of(context).unfocus();
+                              vm.login();
+                            },
                           ),
                   ],
                 ),

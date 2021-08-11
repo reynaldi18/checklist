@@ -1,7 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:stacked/stacked_annotations.dart';
 
-@Singleton()
 class SharedPreferencesManager {
   static SharedPreferencesManager? _instance;
   static SharedPreferences? _sharedPreferences;

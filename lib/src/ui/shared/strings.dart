@@ -9,6 +9,8 @@ class Strings {
   static const String labelHome = 'Beranda';
   static const String labelHistory = 'Riwayat';
   static const String labelAccount = 'Akun';
+  static const String labelPlan = 'Perancangan';
+  static const String labelOnProgress = 'Pengerjaan';
 
   static const String hintName = 'Email';
   static const String hintPassword = 'Password';
