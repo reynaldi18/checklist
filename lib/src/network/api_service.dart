@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:si_jaja/src/helpers/http/http_helper.dart';
+import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/models/user.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
 
@@ -27,4 +28,7 @@ abstract class ApiService {
 
   @GET("/user")
   Future<CoreRes<User>> getUser();
+
+  @GET("/plans")
+  Future<CoreRes<List<Plan>>> history(@Query("status") String status);
 }

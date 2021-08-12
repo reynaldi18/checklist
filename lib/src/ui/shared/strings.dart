@@ -12,6 +12,7 @@ class Strings {
 
   static const String hintName = 'Email';
   static const String hintPassword = 'Password';
+  static const String hintSearchRoad = 'Cari nama jalan';
 
   static const String actionLogin = 'Masuk';
   static const String actionContinue = 'Lanjutkan';

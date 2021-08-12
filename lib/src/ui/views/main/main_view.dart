@@ -7,6 +7,7 @@ import 'package:si_jaja/src/ui/shared/images.dart';
 import 'package:si_jaja/src/ui/shared/strings.dart';
 import 'package:si_jaja/src/ui/shared/styles.dart';
 import 'package:si_jaja/src/ui/views/blank_view.dart';
+import 'package:si_jaja/src/ui/views/history/history_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'main_viewmodel.dart';
@@ -120,7 +121,7 @@ class _MainViewState extends State<MainView> {
       case 0:
         return BlankView();
       case 1:
-        return BlankView();
+        return HistoryView();
       case 2:
         return BlankView();
       default:
