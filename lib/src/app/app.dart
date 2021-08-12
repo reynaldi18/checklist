@@ -1,3 +1,4 @@
+import 'package:si_jaja/src/services/plan_service.dart';
 import 'package:si_jaja/src/services/user_service.dart';
 import 'package:si_jaja/src/ui/views/login/login_view.dart';
 import 'package:si_jaja/src/ui/views/main/main_view.dart';
@@ -17,6 +18,7 @@ import 'package:stacked_services/stacked_services.dart';
     LazySingleton(classType: BottomSheetService),
     LazySingleton(classType: SnackbarService),
     LazySingleton(classType: UserService),
+    LazySingleton(classType: PlanService),
   ],
 )
 class AppSetup {
