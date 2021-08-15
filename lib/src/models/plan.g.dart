@@ -11,6 +11,7 @@ Plan _$PlanFromJson(Map<String, dynamic> json) {
     id: json['id'] as int?,
     name: json['name'] as String?,
     address: json['address'] as String?,
+    status: json['status'] as String?,
   );
 }
 
@@ -18,4 +19,5 @@ Map<String, dynamic> _$PlanToJson(Plan instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
       'address': instance.address,
+      'status': instance.status,
     };

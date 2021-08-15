@@ -53,7 +53,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<CoreRes<List<Plan>>> history(status) async {
+  Future<CoreRes<List<Plan>>> plans(status) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'status': status};
     final _data = <String, dynamic>{};
@@ -61,6 +61,25 @@ class _ApiService implements ApiService {
         _setStreamType<CoreRes<List<Plan>>>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/plans',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = CoreRes<List<Plan>>.fromJson(
+        _result.data!,
+        (json) => (json as List<dynamic>)
+            .map<Plan>((i) => Plan.fromJson(i as Map<String, dynamic>))
+            .toList());
+    return value;
+  }
+
+  @override
+  Future<CoreRes<List<Plan>>> histories(name) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'name': name};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<CoreRes<List<Plan>>>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/histories',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = CoreRes<List<Plan>>.fromJson(

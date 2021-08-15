@@ -1,0 +1,25 @@
+{
+  "status": "OK",
+  "message": "Data perancangan berhasil di dapat.",
+  "result": [
+    {
+      "id": 1,
+      "name": "Jalan Banda",
+      "address": "Jl. Banda No.38, Citarum, Kec. Bandung Wetan, Kota Bandung, Jawa Barat 40115",
+      "status": "Done"
+    },
+    {
+      "id": 2,
+      "name": "Jalan Merdeka",
+      "address": "Jl. Merdeka No.56, Citarum, Kec. Bandung Wetan, Kota Bandung, Jawa Barat 40115",
+      "status": "Reject"
+    },
+    {
+      "id": 3,
+      "name": "Jalan Antapani",
+      "address": "Jl. Purwakarta 1, Babakan Surabaya, Kec. Kiaracondong, Kota Bandung, Jawa Barat 40281",
+      "status": "Done"
+    }
+  ],
+  "time": "2021-06-30 09:46:39"
+}

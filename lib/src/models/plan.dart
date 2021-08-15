@@ -10,11 +10,14 @@ class Plan {
   String? name;
   @JsonKey(name: 'address')
   String? address;
+  @JsonKey(name: 'status')
+  String? status;
 
   Plan({
     this.id,
     this.name,
     this.address,
+    this.status,
   });
 
   factory Plan.fromJson(Map<String, dynamic> json) => _$PlanFromJson(json);

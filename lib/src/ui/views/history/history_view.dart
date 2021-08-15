@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:si_jaja/src/helpers/scalable_dp.dart';
 import 'package:si_jaja/src/ui/shared/dimens.dart';
 import 'package:si_jaja/src/ui/shared/strings.dart';
 import 'package:si_jaja/src/ui/shared/styles.dart';
 import 'package:si_jaja/src/ui/shared/ui_helpers.dart';
 import 'package:si_jaja/src/ui/widgets/custom_appbar.dart';
+import 'package:si_jaja/src/ui/widgets/history_card.dart';
 import 'package:stacked/stacked.dart';
 
 import 'history_viewmodel.dart';
@@ -70,30 +72,32 @@ class HistoryView extends StatelessWidget {
                     ),
                   ),
                 ),
-                ListView(
-                  shrinkWrap: true,
-                  children: [
-                    verticalSpace(SDP.sdp(defaultPaddingSmall)),
-                    Container(
-                      width: screenWidth(context),
-                      decoration: BoxDecoration(
-                        color: white,
-                        borderRadius: BorderRadius.circular(SDP.sdp(8)),
-                        boxShadow: [
-                          BoxShadow(
-                            spreadRadius: 3,
-                            blurRadius: 15,
-                            color: Colors.black12,
+                vm.isBusy
+                    ? Container(
+                        height: screenHeightPercentage(context, percentage: 0.5),
+                        child: SpinKitFadingCircle(
+                          size: SDP.sdp(defaultSize),
+                          color: mainColor,
+                        ),
+                      )
+                    : !vm.hasError
+                        ? ListView(
+                            shrinkWrap: true,
+                            children: [
+                              verticalSpace(SDP.sdp(defaultPaddingSmall)),
+                              Column(
+                                children: vm.plans!.map((e) {
+                                  return Padding(
+                                    padding: EdgeInsets.only(
+                                      bottom: SDP.sdp(defaultPaddingSmall),
+                                    ),
+                                    child: HistoryCard(plan: e),
+                                  );
+                                }).toList(),
+                              )
+                            ],
                           )
-                        ],
-                      ),
-                      child: Padding(
-                        padding: EdgeInsets.all(SDP.sdp(8)),
-                        child: Text('data'),
-                      ),
-                    )
-                  ],
-                )
+                        : Container()
               ],
             ),
           ),

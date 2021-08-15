@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:si_jaja/src/app/app.locator.dart';
+import 'package:si_jaja/src/helpers/connection_helper.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/services/plan_service.dart';
 import 'package:stacked/stacked.dart';
 
-class HistoryViewModel extends BaseViewModel {
+class HistoryViewModel extends FutureViewModel {
   final _planService = locator<PlanService>();
 
   TextEditingController searchController = TextEditingController();
   bool searchValidate = false;
 
+  String? name;
   List<Plan>? plans;
+
+  @override
+  Future futureToRun() => histories(name);
+
+  Future histories(String? name) async {
+    final hasConnection = await ConnectionHelper.hasConnection();
+
+    if (hasConnection) {
+      var result = await _planService.fetchHistory(name ?? '');
+      plans = result?.data;
+      return result;
+    } else
+      ConnectionHelper.showNotConnectionSnackBar();
+    notifyListeners();
+  }
 }

@@ -1,4 +1,8 @@
 import 'package:connectivity/connectivity.dart';
+import 'package:si_jaja/src/app/app.locator.dart';
+import 'package:si_jaja/src/enum/snackbar_type.dart';
+import 'package:si_jaja/src/ui/shared/strings.dart';
+import 'package:stacked_services/stacked_services.dart';
 
 class ConnectionHelper {
   static ConnectivityResult? _connectivityResult;
@@ -16,5 +20,15 @@ class ConnectionHelper {
 
   static Stream<ConnectivityResult> connectionListener() {
     return Connectivity().onConnectivityChanged;
+  }
+
+  static showNotConnectionSnackBar() {
+    final _snackBarService = locator<SnackbarService>();
+    _snackBarService.showCustomSnackBar(
+      variant: SnackBarType.Error,
+      message: Strings.errorNotConnectionDesc,
+      title: Strings.errorNotConnection,
+      duration: Duration(seconds: 2),
+    );
   }
 }

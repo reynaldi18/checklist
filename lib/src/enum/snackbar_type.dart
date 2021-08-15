@@ -1,0 +1,4 @@
+enum SnackBarType {
+  Validate,
+  Error,
+}

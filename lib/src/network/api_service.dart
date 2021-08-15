@@ -12,14 +12,14 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String? baseUrl}) {
     String? token = HttpHelper().getToken();
     dio.options = BaseOptions(
-      receiveTimeout: 3000,
-      connectTimeout: 3000,
+      receiveTimeout: 5000,
+      connectTimeout: 5000,
       headers: {
         'Content-Type': 'application/json',
         if (token != null) 'Authorization': token,
       },
     );
-    
+
     return _ApiService(dio, baseUrl: baseUrl);
   }
 
@@ -30,5 +30,8 @@ abstract class ApiService {
   Future<CoreRes<User>> getUser();
 
   @GET("/plans")
-  Future<CoreRes<List<Plan>>> history(@Query("status") String status);
+  Future<CoreRes<List<Plan>>> plans(@Query("status") String status);
+
+  @GET("/histories")
+  Future<CoreRes<List<Plan>>> histories(@Query("name")  String name);
 }

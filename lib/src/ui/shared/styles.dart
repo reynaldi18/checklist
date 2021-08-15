@@ -21,3 +21,10 @@ TextStyle blackTextStyle = GoogleFonts.poppins(color: black);
 TextStyle blackSoftTextStyle = GoogleFonts.poppins(color: blackSoft);
 TextStyle greyTextStyle = GoogleFonts.poppins(color: grey);
 TextStyle greySoftTextStyle = GoogleFonts.poppins(color: greySoft);
+
+// Theme
+BoxShadow shadow = BoxShadow(
+  color: Colors.black26,
+  blurRadius: 3,
+  offset: Offset(0, 5),
+);

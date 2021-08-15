@@ -1,14 +1,6 @@
-import 'dart:async';
-
 import 'package:stacked/stacked.dart';
 
-class HomeViewModel extends FutureViewModel {
+class HomeViewModel extends BaseViewModel {
 
   int selectedPage = 0;
-
-  @override
-  Future futureToRun() {
-    // TODO: implement futureToRun
-    throw UnimplementedError();
-  }
 }

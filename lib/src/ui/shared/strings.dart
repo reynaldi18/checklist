@@ -23,6 +23,8 @@ class Strings {
 
   static const String errorEmptyEmail = 'Harap masukan email!';
   static const String errorEmptyPassword = 'Harap masukan password!';
+  static const String errorNotConnection = 'Tidak Ada Koneksi Internet';
+  static const String errorNotConnectionDesc = 'Periksa koneksi Anda dan coba lagi.';
 
   static const String messageForgotPassword = '';
 }
