@@ -11,6 +11,7 @@ class Strings {
   static const String labelAccount = 'Akun';
   static const String labelPlan = 'Perancangan';
   static const String labelOnProgress = 'Pengerjaan';
+  static const String labelError = 'Terjadi kesalahan!';
 
   static const String hintName = 'Email';
   static const String hintPassword = 'Password';

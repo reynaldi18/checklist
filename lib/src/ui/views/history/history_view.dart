@@ -6,12 +6,17 @@ import 'package:si_jaja/src/ui/shared/strings.dart';
 import 'package:si_jaja/src/ui/shared/styles.dart';
 import 'package:si_jaja/src/ui/shared/ui_helpers.dart';
 import 'package:si_jaja/src/ui/widgets/custom_appbar.dart';
+import 'package:si_jaja/src/ui/widgets/empty_view.dart';
+import 'package:si_jaja/src/ui/widgets/error_view.dart';
 import 'package:si_jaja/src/ui/widgets/history_card.dart';
 import 'package:stacked/stacked.dart';
 
 import 'history_viewmodel.dart';
 
 class HistoryView extends StatelessWidget {
+  final GlobalKey<RefreshIndicatorState> _refreshIndicatorKey =
+      new GlobalKey<RefreshIndicatorState>();
+
   HistoryView({Key? key}) : super(key: key);
 
   @override
@@ -27,7 +32,7 @@ class HistoryView extends StatelessWidget {
               horizontal: SDP.sdp(defaultPadding),
               vertical: SDP.sdp(defaultPaddingSmall),
             ),
-            child: Column(
+            child: ListView(
               children: [
                 Container(
                   decoration: BoxDecoration(
@@ -74,30 +79,43 @@ class HistoryView extends StatelessWidget {
                 ),
                 vm.isBusy
                     ? Container(
-                        height: screenHeightPercentage(context, percentage: 0.5),
+                        height: screenHeightPercentage(
+                          context,
+                          percentage: 0.6,
+                        ),
                         child: SpinKitFadingCircle(
                           size: SDP.sdp(defaultSize),
                           color: mainColor,
                         ),
                       )
                     : !vm.hasError
-                        ? ListView(
-                            shrinkWrap: true,
-                            children: [
-                              verticalSpace(SDP.sdp(defaultPaddingSmall)),
-                              Column(
-                                children: vm.plans!.map((e) {
-                                  return Padding(
-                                    padding: EdgeInsets.only(
-                                      bottom: SDP.sdp(defaultPaddingSmall),
-                                    ),
-                                    child: HistoryCard(plan: e),
-                                  );
-                                }).toList(),
+                        ? vm.plans != null
+                            ? Column(
+                                children: [
+                                  verticalSpace(SDP.sdp(defaultPaddingSmall)),
+                                  vm.plans!.isNotEmpty
+                                      ? Column(
+                                          children: vm.plans!.map((e) {
+                                            return Padding(
+                                              padding: EdgeInsets.only(
+                                                bottom: SDP
+                                                    .sdp(defaultPaddingSmall),
+                                              ),
+                                              child: HistoryCard(plan: e),
+                                            );
+                                          }).toList(),
+                                        )
+                                      : EmptyView()
+                                ],
                               )
-                            ],
+                            : GestureDetector(
+                                onTap: () => vm.histories(),
+                                child: ErrorView(),
+                              )
+                        : GestureDetector(
+                            onTap: () => vm.histories(),
+                            child: ErrorView(),
                           )
-                        : Container()
               ],
             ),
           ),

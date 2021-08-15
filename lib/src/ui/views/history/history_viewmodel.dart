@@ -15,14 +15,16 @@ class HistoryViewModel extends FutureViewModel {
   List<Plan>? plans;
 
   @override
-  Future futureToRun() => histories(name);
+  Future futureToRun() => histories();
 
-  Future histories(String? name) async {
+  Future histories() async {
     final hasConnection = await ConnectionHelper.hasConnection();
 
     if (hasConnection) {
-      var result = await _planService.fetchHistory(name ?? '');
+      setBusy(true);
+      var result = await _planService.fetchHistory(name);
       plans = result?.data;
+      setBusy(false);
       return result;
     } else
       ConnectionHelper.showNotConnectionSnackBar();
