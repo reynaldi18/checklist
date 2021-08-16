@@ -5,6 +5,7 @@ import 'package:si_jaja/src/ui/shared/strings.dart';
 import 'package:si_jaja/src/ui/shared/styles.dart';
 import 'package:si_jaja/src/ui/shared/ui_helpers.dart';
 import 'package:si_jaja/src/ui/widgets/custom_tabbar.dart';
+import 'package:si_jaja/src/ui/widgets/plan_card.dart';
 import 'package:stacked/stacked.dart';
 
 import 'home_viewmodel.dart';
@@ -56,13 +57,7 @@ class _HomeViewState extends State<HomeView> {
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(SDP.sdp(4)),
-                              boxShadow: [
-                                BoxShadow(
-                                  spreadRadius: 3,
-                                  blurRadius: 15,
-                                  color: Colors.black12,
-                                )
-                              ],
+                              boxShadow: [shadow],
                             ),
                             child: Padding(
                               padding: EdgeInsets.all(SDP.sdp(10)),
@@ -131,6 +126,23 @@ class _HomeViewState extends State<HomeView> {
                     });
                   },
                 ),
+                verticalSpace(SDP.sdp(18)),
+                vm.selectedPage == 0
+                    ? Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: SDP.sdp(defaultPadding),
+                        ),
+                        child: Column(
+                          children: [
+                            PlanCard(),
+                            verticalSpace(SDP.sdp(14)),
+                            PlanCard(),
+                            verticalSpace(SDP.sdp(14)),
+                            PlanCard(),
+                          ],
+                        ),
+                      )
+                    : Container(),
               ],
             ),
           )),

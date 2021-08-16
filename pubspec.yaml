@@ -37,7 +37,7 @@ dependencies:
   firebase_database: ^7.1.2
 
   # Authentication
-  stacked_firebase_auth: ^0.2.8
+  stacked_firebase_auth: ^0.2.10
 
   # state management
   stacked: ^2.2.3
@@ -69,7 +69,7 @@ dependencies:
   pin_code_fields: ^7.3.0
 
   # notification
-  flutter_local_notifications: ^8.1.1
+  flutter_local_notifications: ^8.1.1+1
 
   # animation
   animations: ^2.0.1

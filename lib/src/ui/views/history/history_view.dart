@@ -29,51 +29,56 @@ class HistoryView extends StatelessWidget {
           center: true,
           child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: SDP.sdp(defaultPadding),
               vertical: SDP.sdp(defaultPaddingSmall),
             ),
             child: ListView(
+              physics: BouncingScrollPhysics(),
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(SDP.sdp(8)),
-                    border: Border.all(color: black),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SDP.sdp(defaultPadding),
                   ),
-                  child: TextField(
-                    controller: vm.searchController,
-                    decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(
-                        SDP.sdp(12),
-                        SDP.sdp(10),
-                        0,
-                        SDP.sdp(10),
-                      ),
-                      suffixIcon: vm.searchController.text.isEmpty
-                          ? GestureDetector(
-                              onTap: () {
-                                FocusScope.of(context).unfocus();
-                              },
-                              child: Icon(
-                                Icons.search,
-                                color: black,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(SDP.sdp(8)),
+                      border: Border.all(color: black),
+                    ),
+                    child: TextField(
+                      controller: vm.searchController,
+                      decoration: InputDecoration(
+                        contentPadding: EdgeInsets.fromLTRB(
+                          SDP.sdp(12),
+                          SDP.sdp(10),
+                          0,
+                          SDP.sdp(10),
+                        ),
+                        suffixIcon: vm.searchController.text.isEmpty
+                            ? GestureDetector(
+                                onTap: () {
+                                  FocusScope.of(context).unfocus();
+                                },
+                                child: Icon(
+                                  Icons.search,
+                                  color: black,
+                                ),
+                              )
+                            : GestureDetector(
+                                onTap: () {
+                                  vm.searchController.clear();
+                                },
+                                child: Icon(
+                                  Icons.clear,
+                                  color: failed,
+                                ),
                               ),
-                            )
-                          : GestureDetector(
-                              onTap: () {
-                                vm.searchController.clear();
-                              },
-                              child: Icon(
-                                Icons.clear,
-                                color: failed,
-                              ),
-                            ),
-                      border: InputBorder.none,
-                      hintStyle: greyTextStyle.copyWith(
-                        color: grey,
-                        fontSize: SDP.sdp(10),
+                        border: InputBorder.none,
+                        hintStyle: greyTextStyle.copyWith(
+                          color: grey,
+                          fontSize: SDP.sdp(10),
+                        ),
+                        hintText: Strings.hintSearchRoad,
                       ),
-                      hintText: Strings.hintSearchRoad,
                     ),
                   ),
                 ),
@@ -94,16 +99,21 @@ class HistoryView extends StatelessWidget {
                                 children: [
                                   verticalSpace(SDP.sdp(defaultPaddingSmall)),
                                   vm.plans!.isNotEmpty
-                                      ? Column(
-                                          children: vm.plans!.map((e) {
-                                            return Padding(
-                                              padding: EdgeInsets.only(
-                                                bottom: SDP
-                                                    .sdp(defaultPaddingSmall),
-                                              ),
-                                              child: HistoryCard(plan: e),
-                                            );
-                                          }).toList(),
+                                      ? Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: SDP.sdp(defaultPadding),
+                                          ),
+                                          child: Column(
+                                            children: vm.plans!.map((e) {
+                                              return Padding(
+                                                padding: EdgeInsets.only(
+                                                  bottom: SDP
+                                                      .sdp(defaultPaddingSmall),
+                                                ),
+                                                child: HistoryCard(plan: e),
+                                              );
+                                            }).toList(),
+                                          ),
                                         )
                                       : EmptyView()
                                 ],
