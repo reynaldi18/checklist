@@ -11,16 +11,19 @@ import 'package:stacked/stacked.dart';
 
 import '../ui/views/login/login_view.dart';
 import '../ui/views/main/main_view.dart';
+import '../ui/views/plan/plan_view.dart';
 import '../ui/views/splash_screen/splash_screen_view.dart';
 
 class Routes {
   static const String splashScreenView = '/';
   static const String loginView = '/login-view';
   static const String mainView = '/main-view';
+  static const String planView = '/plan-view';
   static const all = <String>{
     splashScreenView,
     loginView,
     mainView,
+    planView,
   };
 }
 
@@ -31,6 +34,7 @@ class StackedRouter extends RouterBase {
     RouteDef(Routes.splashScreenView, page: SplashScreenView),
     RouteDef(Routes.loginView, page: LoginView),
     RouteDef(Routes.mainView, page: MainView),
+    RouteDef(Routes.planView, page: PlanView),
   ];
   @override
   Map<Type, StackedRouteFactory> get pagesMap => _pagesMap;
@@ -59,6 +63,16 @@ class StackedRouter extends RouterBase {
         settings: data,
       );
     },
+    PlanView: (data) {
+      var args = data.getArgs<PlanViewArguments>(nullOk: false);
+      return MaterialPageRoute<dynamic>(
+        builder: (context) => PlanView(
+          key: args.key,
+          id: args.id,
+        ),
+        settings: data,
+      );
+    },
   };
 }
 
@@ -76,4 +90,11 @@ class SplashScreenViewArguments {
 class LoginViewArguments {
   final Key? key;
   LoginViewArguments({this.key});
+}
+
+/// PlanView arguments holder class
+class PlanViewArguments {
+  final Key? key;
+  final int id;
+  PlanViewArguments({this.key, required this.id});
 }

@@ -24,7 +24,7 @@ abstract class ApiService {
     return _ApiService(dio, baseUrl: baseUrl);
   }
 
-  @POST("/login")
+  @POST("/oauth/token")
   Future<AuthRes> auth(@Body() Map<String, dynamic> body);
 
   @GET("/user")

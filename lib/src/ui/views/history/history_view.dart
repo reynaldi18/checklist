@@ -96,12 +96,16 @@ class HistoryView extends StatelessWidget {
                                     vm.plans!.isNotEmpty
                                         ? Column(
                                             children: vm.plans!.map((e) {
-                                              return Padding(
-                                                padding: EdgeInsets.only(
-                                                  bottom: SDP
-                                                      .sdp(defaultPaddingSmall),
+                                              return GestureDetector(
+                                                onTap: () =>
+                                                    vm.viewPlan(e.id ?? 0),
+                                                child: Padding(
+                                                  padding: EdgeInsets.only(
+                                                    bottom: SDP.sdp(
+                                                        defaultPaddingSmall),
+                                                  ),
+                                                  child: HistoryCard(plan: e),
                                                 ),
-                                                child: HistoryCard(plan: e),
                                               );
                                             }).toList(),
                                           )

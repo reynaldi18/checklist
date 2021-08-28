@@ -108,7 +108,7 @@ class _ProfileViewState extends State<ProfileView> {
                         context: context,
                         initialDate: DateTime.now(),
                         initialDatePickerMode: DatePickerMode.day,
-                        firstDate: DateTime.now(),
+                        firstDate: DateTime(1800),
                         lastDate: DateTime(2101));
                     if (picked != null)
                       setState(() {

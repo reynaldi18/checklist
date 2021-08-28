@@ -63,7 +63,7 @@ dependencies:
   # style
   google_fonts: ^2.1.0
   flutter_svg: ^0.22.0
-  flutter_spinkit: ^5.0.0
+  flutter_spinkit: ^5.1.0
 
   # pin code
   pin_code_fields: ^7.3.0
@@ -73,6 +73,9 @@ dependencies:
 
   # animation
   animations: ^2.0.1
+
+  # image picker
+  multi_image_picker2: ^5.0.2
 
 dev_dependencies:
   flutter_test:

@@ -5,18 +5,27 @@ import 'package:si_jaja/src/ui/shared/styles.dart';
 
 class NumberTextField extends StatelessWidget {
   final String? label;
+  final String? errorLabel;
   final TextEditingController? controller;
   final bool password;
+  final bool validate;
 
-  const NumberTextField(
-      {Key? key, this.label, this.controller, this.password = false})
-      : super(key: key);
+  const NumberTextField({
+    Key? key,
+    this.label,
+    this.controller,
+    this.password = false,
+    this.validate = false,
+    this.errorLabel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SDP.init(context);
     return Container(
-      height: SDP.sdp(textFieldHeight),
+      height: validate == true
+          ? SDP.sdp(textFieldHeight + (textFieldHeight / 2))
+          : SDP.sdp(textFieldHeight),
       child: TextField(
         cursorColor: black,
         keyboardType: TextInputType.number,
@@ -26,6 +35,7 @@ class NumberTextField extends StatelessWidget {
         ),
         decoration: InputDecoration(
           labelText: label,
+          errorText: validate == true ? errorLabel : null,
           labelStyle: TextStyle(color: hint),
           counterStyle: TextStyle(
             color: mainColor,

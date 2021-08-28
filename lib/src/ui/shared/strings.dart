@@ -11,9 +11,22 @@ class Strings {
   static const String labelAccount = 'Akun';
   static const String labelPlan = 'Perencanaan';
   static const String labelOnProgress = 'Pelaksanaan';
+  static const String labelDone = 'Selesai';
   static const String labelError = 'Terjadi kesalahan!';
   static const String labelMale = 'Laki-laki';
   static const String labelFemale = 'Perempuan';
+  static const String labelRoadName = 'Nama Jalan';
+  static const String labelRoadWidth = 'Lebar Jalan';
+  static const String labelRoadLength = 'Panjang Jalan';
+  static const String labelAddress = 'Alamat';
+  static const String labelBudget = 'Anggaran';
+  static const String labelCost = 'Nilai Kontak';
+  static const String labelExecutor = 'Kontraktor Pelaksana';
+  static const String labelExecutorContact = 'Kontak Pelaksana';
+  static const String labelStartDate = 'Tanggal Awal';
+  static const String labelEndDate = 'Tanggal Akhir';
+  static const String labelSupervisor = 'Konsultan Pengawas';
+  static const String labelImage = 'Foto';
 
   static const String hintEmail = 'Email';
   static const String hintPassword = 'Password';
@@ -32,6 +45,12 @@ class Strings {
   static const String errorEmptyPassword = 'Harap masukan password!';
   static const String errorEmptyName = 'Harap masukan nama!';
   static const String errorEmptyPhone = 'Harap masukan nomor telepon!';
+  static const String errorEmptyRoadWidth = 'Harap masukan lebar jalan!';
+  static const String errorEmptyRoadLength = 'Harap masukan panjang jalan!';
+  static const String errorEmptyCost = 'Harap masukan nilai kontrak!';
+  static const String errorEmptyExecutor = 'Harap masukan kontraktor pelaksana!';
+  static const String errorEmptyExecutorContact = 'Harap masukan kontak person pelaksana!';
+  static const String errorEmptySupervisor = 'Harap masukan konsultan pengawas!';
   static const String errorNotConnection = 'Tidak Ada Koneksi Internet';
   static const String errorNotConnectionDesc = 'Periksa koneksi Anda dan coba lagi.';
 

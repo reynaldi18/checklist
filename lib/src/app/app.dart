@@ -2,6 +2,7 @@ import 'package:si_jaja/src/services/plan_service.dart';
 import 'package:si_jaja/src/services/user_service.dart';
 import 'package:si_jaja/src/ui/views/login/login_view.dart';
 import 'package:si_jaja/src/ui/views/main/main_view.dart';
+import 'package:si_jaja/src/ui/views/plan/plan_view.dart';
 import 'package:si_jaja/src/ui/views/splash_screen/splash_screen_view.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -11,6 +12,7 @@ import 'package:stacked_services/stacked_services.dart';
     MaterialRoute(page: SplashScreenView, initial: true),
     MaterialRoute(page: LoginView),
     MaterialRoute(page: MainView),
+    MaterialRoute(page: PlanView),
   ],
   dependencies: [
     LazySingleton(classType: NavigationService),
