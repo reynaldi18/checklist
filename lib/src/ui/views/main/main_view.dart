@@ -6,9 +6,9 @@ import 'package:si_jaja/src/ui/shared/dimens.dart';
 import 'package:si_jaja/src/ui/shared/images.dart';
 import 'package:si_jaja/src/ui/shared/strings.dart';
 import 'package:si_jaja/src/ui/shared/styles.dart';
-import 'package:si_jaja/src/ui/views/blank_view.dart';
-import 'package:si_jaja/src/ui/views/home/home_view.dart';
 import 'package:si_jaja/src/ui/views/history/history_view.dart';
+import 'package:si_jaja/src/ui/views/home/home_view.dart';
+import 'package:si_jaja/src/ui/views/profile/profile_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'main_viewmodel.dart';
@@ -124,9 +124,9 @@ class _MainViewState extends State<MainView> {
       case 1:
         return HistoryView();
       case 2:
-        return BlankView();
+        return ProfileView();
       default:
-        return BlankView();
+        return HomeView();
     }
   }
 }

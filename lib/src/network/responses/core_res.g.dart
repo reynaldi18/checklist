@@ -11,7 +11,7 @@ CoreRes<T> _$CoreResFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) {
   return CoreRes<T>(
-    status: json['status'] as String?,
+    status: json['status'] as bool?,
     message: json['message'] as String?,
     data: _$nullableGenericFromJson(json['data'], fromJsonT),
     time: json['time'] as String?,

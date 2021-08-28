@@ -8,6 +8,9 @@ import 'package:stacked/stacked.dart';
 class HistoryViewModel extends FutureViewModel {
   final _planService = locator<PlanService>();
 
+  final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
+  new GlobalKey<RefreshIndicatorState>();
+
   TextEditingController searchController = TextEditingController();
   bool searchValidate = false;
 

@@ -8,15 +8,23 @@ import 'package:si_jaja/src/ui/shared/styles.dart';
 import 'package:si_jaja/src/ui/shared/ui_helpers.dart';
 
 class ErrorView extends StatelessWidget {
+  final bool half;
+
   const ErrorView({
     Key? key,
+    this.half = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SDP.init(context);
     return Container(
-      height: screenHeightPercentage(context, percentage: 0.6),
+      height: half == false
+          ? screenHeight(context)
+          : screenHeightPercentage(
+              context,
+              percentage: 0.5,
+            ),
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

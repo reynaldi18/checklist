@@ -9,6 +9,7 @@ import 'package:si_jaja/src/helpers/storage/shared_preferences_manager.dart';
 import 'package:si_jaja/src/models/user.dart';
 import 'package:si_jaja/src/network/api_service.dart';
 import 'package:si_jaja/src/network/requests/login_req.dart';
+import 'package:si_jaja/src/network/responses/auth_res.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -19,7 +20,7 @@ class UserService {
   final SharedPreferencesManager _sharedPreferencesManager =
       locator<SharedPreferencesManager>();
 
-  Future<CoreRes<User>?> login(
+  Future<AuthRes?> login(
     String email,
     String password,
   ) async {
@@ -29,13 +30,11 @@ class UserService {
         password,
       ).toJson();
       final data = await apiService.auth(req);
-      if (data.status == 'OK') {
-        _sharedPreferencesManager.putString(
-          Session.token,
-          data.data?.token ?? '',
-        );
-        fetchUser();
-      }
+      _sharedPreferencesManager.putString(
+        Session.token,
+        data.accessToken ?? '',
+      );
+      fetchUser();
       return data;
     } catch (e) {
       print(e);
@@ -45,7 +44,7 @@ class UserService {
   Future<CoreRes<User>?> fetchUser() async {
     try {
       final data = await apiService.getUser();
-      if (data.status == 'OK') saveUserInfo(data.data!);
+      if (data.status == true) saveUserInfo(data.data!);
       return data;
     } catch (e) {
       print(e);
@@ -59,7 +58,7 @@ class UserService {
     await prefs.setString(Session.user, jsonEncode(user));
   }
 
-  Future<User> getUser(String key) async {
+  Future<User> getUser() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
     Map<String, dynamic> userMap;

@@ -3,6 +3,7 @@ import 'package:retrofit/http.dart';
 import 'package:si_jaja/src/helpers/http/http_helper.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/models/user.dart';
+import 'package:si_jaja/src/network/responses/auth_res.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
 
 part 'api_service.g.dart';
@@ -24,14 +25,17 @@ abstract class ApiService {
   }
 
   @POST("/login")
-  Future<CoreRes<User>> auth(@Body() Map<String, dynamic> body);
+  Future<AuthRes> auth(@Body() Map<String, dynamic> body);
 
   @GET("/user")
   Future<CoreRes<User>> getUser();
 
-  @GET("/plans")
-  Future<CoreRes<List<Plan>>> plans(@Query("status") String status);
+  @GET("/roads")
+  Future<CoreRes<List<Plan>>> roads(@Query("status") String status);
 
   @GET("/histories")
   Future<CoreRes<List<Plan>>> histories(@Query("name")  String name);
+
+  @GET("/roads/{id}")
+  Future<CoreRes<Plan>> getRoadDetail(@Path("id") int id);
 }

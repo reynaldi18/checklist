@@ -5,14 +5,11 @@ part 'core_res.g.dart';
 @JsonSerializable(genericArgumentFactories: true)
 class CoreRes<T> {
   @JsonKey(name: 'status')
-  String? status;
-
+  bool? status;
   @JsonKey(name: 'message')
   String? message;
-
   @JsonKey(name: 'data')
   T? data;
-
   @JsonKey(name: 'time')
   String? time;
 

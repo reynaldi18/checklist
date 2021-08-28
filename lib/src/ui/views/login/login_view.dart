@@ -46,7 +46,7 @@ class LoginView extends StatelessWidget {
                     ),
                     verticalSpace(SDP.sdp(14)),
                     CustomTextField(
-                      label: Strings.hintName,
+                      label: Strings.hintEmail,
                       controller: vm.emailController,
                       validate: vm.emailValidate,
                       errorLabel: Strings.errorEmptyEmail,

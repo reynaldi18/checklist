@@ -9,13 +9,19 @@ class Strings {
   static const String labelHome = 'Beranda';
   static const String labelHistory = 'Riwayat';
   static const String labelAccount = 'Akun';
-  static const String labelPlan = 'Perancangan';
-  static const String labelOnProgress = 'Pengerjaan';
+  static const String labelPlan = 'Perencanaan';
+  static const String labelOnProgress = 'Pelaksanaan';
   static const String labelError = 'Terjadi kesalahan!';
+  static const String labelMale = 'Laki-laki';
+  static const String labelFemale = 'Perempuan';
 
-  static const String hintName = 'Email';
+  static const String hintEmail = 'Email';
   static const String hintPassword = 'Password';
   static const String hintSearchRoad = 'Cari nama jalan';
+  static const String hintName = 'Nama';
+  static const String hintPhone = 'Nomor Telepon';
+  static const String hintGender = 'Jenis Kelamin';
+  static const String hintBirthDate = 'Tanggal Lahir';
 
   static const String actionLogin = 'Masuk';
   static const String actionContinue = 'Lanjutkan';
@@ -24,6 +30,8 @@ class Strings {
 
   static const String errorEmptyEmail = 'Harap masukan email!';
   static const String errorEmptyPassword = 'Harap masukan password!';
+  static const String errorEmptyName = 'Harap masukan nama!';
+  static const String errorEmptyPhone = 'Harap masukan nomor telepon!';
   static const String errorNotConnection = 'Tidak Ada Koneksi Internet';
   static const String errorNotConnectionDesc = 'Periksa koneksi Anda dan coba lagi.';
 

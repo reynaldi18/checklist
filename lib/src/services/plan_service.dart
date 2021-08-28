@@ -24,10 +24,22 @@ class PlanService {
     }
   }
 
-  Future<CoreRes<List<Plan>>?> fetchPlan(String status) async {
+  Future<CoreRes<List<Plan>>?> fetchRoads(String status) async {
     try {
       final data =
-          await apiService.plans(status).then((value) => value).catchError((e) {
+          await apiService.roads(status).then((value) => value).catchError((e) {
+        logger.e(e);
+      });
+      return data;
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<CoreRes<Plan>?> fetchDetail(int id) async {
+    try {
+      final data =
+      await apiService.getRoadDetail(id).then((value) => value).catchError((e) {
         logger.e(e);
       });
       return data;

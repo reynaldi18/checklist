@@ -57,7 +57,7 @@ class HistoryCard extends StatelessWidget {
               style: blackTextStyle.copyWith(
                   fontSize: SDP.sdp(9),
                   fontWeight: FontWeight.normal,
-                  color: plan.status == 'Done' ? success : failed
+                  color: success
               ),
             ),
           ],
