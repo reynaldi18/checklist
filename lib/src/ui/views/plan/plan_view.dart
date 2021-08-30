@@ -585,12 +585,15 @@ class _PlanViewState extends State<PlanView> {
                                 ],
                               ),
                         verticalSpace(SDP.sdp(defaultPadding)),
-                        CustomButton(
-                          label: vm.plan?.execution == null
-                              ? Strings.labelOnProgress.toUpperCase()
-                              : Strings.labelDone.toUpperCase(),
-                          onPress: () {},
-                        ),
+                        vm.plan?.execution == null
+                            ? CustomButton(
+                                label: Strings.labelOnProgress.toUpperCase(),
+                                onPress: () => vm.validate(),
+                              )
+                            : CustomButton(
+                                label: Strings.labelDone.toUpperCase(),
+                                onPress: () {},
+                              ),
                       ],
                     ),
                   ),

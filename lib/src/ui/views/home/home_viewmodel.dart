@@ -3,16 +3,19 @@ import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/app/app.router.dart';
 import 'package:si_jaja/src/constant/config.dart';
 import 'package:si_jaja/src/helpers/connection_helper.dart';
+import 'package:si_jaja/src/models/dashboard.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/models/user.dart';
 import 'package:si_jaja/src/services/plan_service.dart';
 import 'package:si_jaja/src/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
+import 'package:intl/intl.dart';
 
 const String _UserData = 'delayedUser';
 const String _Planning = 'delayedPlanning';
 const String _Ongoing = 'delayedOngoing';
+const String _Summaries = 'delayedSummaries';
 
 class HomeViewModel extends MultipleFutureViewModel {
   final GlobalKey<RefreshIndicatorState> refreshIndicatorKey =
@@ -27,13 +30,19 @@ class HomeViewModel extends MultipleFutureViewModel {
 
   List<Plan>? get fetchOngoing => dataMap?[_Ongoing];
 
+  Dashboard? get fetchSummaries => dataMap?[_Summaries];
+
   bool get fetchingUser => busy(_UserData);
 
   bool get fetchingPlanning => busy(_Planning);
 
   bool get fetchingOngoing => busy(_Ongoing);
 
+  bool get fetchingSummaries => busy(_Summaries);
+
   int selectedIndex = 0;
+  String? budget;
+  String? cost;
 
   Future<void> refresh() async {
     _navigationService.replaceWith(Routes.mainView);
@@ -44,6 +53,7 @@ class HomeViewModel extends MultipleFutureViewModel {
         _UserData: getUserData,
         _Planning: getPlanning,
         _Ongoing: getOngoing,
+        _Summaries: getSummaries,
       };
 
   Future<User?> getUserData() async {
@@ -75,8 +85,25 @@ class HomeViewModel extends MultipleFutureViewModel {
     notifyListeners();
   }
 
+  Future<Dashboard?> getSummaries() async {
+    final hasConnection = await ConnectionHelper.hasConnection();
+    final formatCurrency = NumberFormat.simpleCurrency(locale: 'id_ID');
+
+    if (hasConnection) {
+      final result = await _planService.fetchSummaries();
+      var budgetData = double.parse(result?.data?.budget ?? '');
+      var costData = double.parse(result?.data?.cost ?? '');
+      budget = formatCurrency.format(budgetData);
+      cost = formatCurrency.format(costData);
+      notifyListeners();
+      return result?.data;
+    } else
+      ConnectionHelper.showNotConnectionSnackBar();
+    notifyListeners();
+  }
+
   void viewPlan(int id) => _navigationService.navigateTo(
-    Routes.planView,
-    arguments: PlanViewArguments(id: id),
-  );
+        Routes.planView,
+        arguments: PlanViewArguments(id: id),
+      );
 }

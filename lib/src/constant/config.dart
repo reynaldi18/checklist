@@ -1,6 +1,7 @@
 class Config {
-  static final String clientId = "2";
-  static final String clientSecret = "sf0wj61JiqiJhxEeFqqBvIMlDsylMWZzKjsTAS0O";
+  static const String grantType = 'password';
+  static const int clientId = 2;
+  static const String clientSecret = '2nfop1OQ9CJyEwkSKxVtDNQvvRbAae7FpUNykG3X';
   static final String type = "1";
   static final String dateFormat = "yyyy-MM-dd";
   static final String planning = "planning";

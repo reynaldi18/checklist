@@ -1,13 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'execution.g.dart';
+part 'execution_req.g.dart';
 
 @JsonSerializable()
-class Execution {
-  @JsonKey(name: 'road_width')
-  String? roadWidth;
-  @JsonKey(name: 'road_length')
-  String? roadLength;
+class ExecutionReq {
+  @JsonKey(name: 'width')
+  String? width;
+  @JsonKey(name: 'length')
+  String? length;
   @JsonKey(name: 'cost')
   String? cost;
   @JsonKey(name: 'executor')
@@ -23,10 +23,9 @@ class Execution {
   @JsonKey(name: 'images')
   List<String>? images;
 
-
-  Execution({
-    this.roadWidth,
-    this.roadLength,
+  ExecutionReq({
+    this.width,
+    this.length,
     this.cost,
     this.executor,
     this.executorContact,
@@ -36,7 +35,8 @@ class Execution {
     this.images,
   });
 
-  factory Execution.fromJson(Map<String, dynamic> json) => _$ExecutionFromJson(json);
+  factory ExecutionReq.fromJson(Map<String, dynamic> json) =>
+      _$ExecutionReqFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ExecutionToJson(this);
+  Map<String, dynamic> toJson() => _$ExecutionReqToJson(this);
 }

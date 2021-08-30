@@ -8,12 +8,18 @@ part of 'login_req.dart';
 
 LoginReq _$LoginReqFromJson(Map<String, dynamic> json) {
   return LoginReq(
-    json['email'] as String?,
-    json['password'] as String?,
+    username: json['username'] as String?,
+    password: json['password'] as String?,
+    grantType: json['grant_type'] as String?,
+    clientId: json['client_id'] as int?,
+    clientSecret: json['client_secret'] as String?,
   );
 }
 
 Map<String, dynamic> _$LoginReqToJson(LoginReq instance) => <String, dynamic>{
-      'email': instance.email,
+      'username': instance.username,
       'password': instance.password,
+      'grant_type': instance.grantType,
+      'client_id': instance.clientId,
+      'client_secret': instance.clientSecret,
     };

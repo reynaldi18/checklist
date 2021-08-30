@@ -52,6 +52,8 @@ class Strings {
   static const String errorEmptyExecutor = 'Harap masukan kontraktor pelaksana!';
   static const String errorEmptyExecutorContact = 'Harap masukan kontak person pelaksana!';
   static const String errorEmptySupervisor = 'Harap masukan konsultan pengawas!';
+  static const String errorEmptyStartDate = 'Harap tentukan tanggal awal!';
+  static const String errorEmptyEndDate = 'Harap tentukan tanggal akhir!';
   static const String errorNotConnection = 'Tidak Ada Koneksi Internet';
   static const String errorNotConnectionDesc = 'Periksa koneksi Anda dan coba lagi.';
 

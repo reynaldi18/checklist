@@ -11,10 +11,12 @@ CoreRes<T> _$CoreResFromJson<T>(
   T Function(Object? json) fromJsonT,
 ) {
   return CoreRes<T>(
-    status: json['status'] as bool?,
+    success: json['success'] as bool?,
     message: json['message'] as String?,
     data: _$nullableGenericFromJson(json['data'], fromJsonT),
-    time: json['time'] as String?,
+    time: json['time'] == null
+        ? null
+        : Time.fromJson(json['time'] as Map<String, dynamic>),
   );
 }
 
@@ -23,7 +25,7 @@ Map<String, dynamic> _$CoreResToJson<T>(
   Object? Function(T value) toJsonT,
 ) =>
     <String, dynamic>{
-      'status': instance.status,
+      'success': instance.success,
       'message': instance.message,
       'data': _$nullableGenericToJson(instance.data, toJsonT),
       'time': instance.time,

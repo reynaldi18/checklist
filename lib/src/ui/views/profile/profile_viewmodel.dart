@@ -6,13 +6,13 @@ import 'package:si_jaja/src/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-class ProfileViewModel extends FutureViewModel {
+class ProfileViewModel extends FutureViewModel<User?> {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
 
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController emailController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   bool nameValidate = false;
   bool emailValidate = false;
   bool phoneValidate = false;
@@ -23,12 +23,14 @@ class ProfileViewModel extends FutureViewModel {
   User? user;
 
   @override
-  Future futureToRun() => getUserData();
+  Future<User?> futureToRun() => getUserData();
 
   Future<User?> getUserData() async {
-    var userData = await _userService.getUser();
-    print('USER: ${userData.name}');
-    nameController.text = userData.name ?? '';
+    var userData = await _userService.fetchUser();
+    nameController.text = userData?.name ?? '';
+    emailController.text = userData?.email ?? '';
+    print('USER: ${userData?.name}');
+    notifyListeners();
     user = userData;
     return userData;
   }

@@ -73,27 +73,54 @@ class _HomeViewState extends State<HomeView> {
                                                   Expanded(
                                                     child: Column(
                                                       children: [
-                                                        Text(
-                                                          vm.fetchPlanning
-                                                                  ?.length
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            Text(
+                                                              vm.fetchSummaries
+                                                                  ?.planning
                                                                   .toString() ??
-                                                              '-',
-                                                          style: mainTextStyle
-                                                              .copyWith(
-                                                            fontSize:
-                                                                SDP.sdp(18),
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                          ),
+                                                                  '-',
+                                                              style:
+                                                              mainTextStyle
+                                                                  .copyWith(
+                                                                fontSize:
+                                                                SDP.sdp(14),
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w700,
+                                                              ),
+                                                            ),
+                                                            horizontalSpace(
+                                                                SDP.sdp(4)),
+                                                            Text(
+                                                              Strings
+                                                                  .labelOnProgress,
+                                                              style:
+                                                              blackTextStyle
+                                                                  .copyWith(
+                                                                fontSize:
+                                                                SDP.sdp(10),
+                                                                fontWeight:
+                                                                FontWeight
+                                                                    .w400,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                         Text(
-                                                          Strings.labelPlan,
-                                                          style: blackTextStyle
+                                                          vm.budget ??
+                                                              '-',
+                                                          style:
+                                                          mainTextStyle
                                                               .copyWith(
                                                             fontSize:
-                                                                SDP.sdp(10),
+                                                            SDP.sdp(10),
                                                             fontWeight:
-                                                                FontWeight.w400,
+                                                            FontWeight
+                                                                .w700,
                                                           ),
                                                         ),
                                                       ],
@@ -108,28 +135,54 @@ class _HomeViewState extends State<HomeView> {
                                                   Expanded(
                                                     child: Column(
                                                       children: [
-                                                        Text(
-                                                          vm.fetchOngoing
-                                                                  ?.length
-                                                                  .toString() ??
-                                                              '-',
-                                                          style: mainTextStyle
-                                                              .copyWith(
-                                                            fontSize:
-                                                                SDP.sdp(18),
-                                                            fontWeight:
-                                                                FontWeight.w700,
-                                                          ),
+                                                        Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              vm.fetchSummaries
+                                                                      ?.ongoing
+                                                                      .toString() ??
+                                                                  '-',
+                                                              style:
+                                                                  mainTextStyle
+                                                                      .copyWith(
+                                                                fontSize:
+                                                                    SDP.sdp(14),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w700,
+                                                              ),
+                                                            ),
+                                                            horizontalSpace(
+                                                                SDP.sdp(4)),
+                                                            Text(
+                                                              Strings
+                                                                  .labelOnProgress,
+                                                              style:
+                                                                  blackTextStyle
+                                                                      .copyWith(
+                                                                fontSize:
+                                                                    SDP.sdp(10),
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                         Text(
-                                                          Strings
-                                                              .labelOnProgress,
-                                                          style: blackTextStyle
+                                                          vm.cost ??
+                                                              '-',
+                                                          style:
+                                                          mainTextStyle
                                                               .copyWith(
                                                             fontSize:
-                                                                SDP.sdp(10),
+                                                            SDP.sdp(10),
                                                             fontWeight:
-                                                                FontWeight.w400,
+                                                            FontWeight
+                                                                .w700,
                                                           ),
                                                         ),
                                                       ],

@@ -17,8 +17,6 @@ class SplashScreenViewModel extends FutureViewModel {
   Future versionCheck() async {
     String? token = HttpHelper().getToken();
 
-    print(token);
-
     if (token != null)
       Timer(_duration, navigateToDashboard);
     else

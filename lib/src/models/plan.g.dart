@@ -14,7 +14,7 @@ Plan _$PlanFromJson(Map<String, dynamic> json) {
     status: json['status'] as String?,
     roadWidth: (json['road_width'] as num?)?.toDouble(),
     roadLength: (json['road_length'] as num?)?.toDouble(),
-    budget: (json['budget'] as num?)?.toDouble(),
+    budget: json['budget'] as String?,
     execution: json['execution'] == null
         ? null
         : Execution.fromJson(json['execution'] as Map<String, dynamic>),

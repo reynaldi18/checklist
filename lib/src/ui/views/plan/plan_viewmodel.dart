@@ -10,6 +10,7 @@ import 'package:si_jaja/src/helpers/connection_helper.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/services/plan_service.dart';
 import 'package:si_jaja/src/ui/shared/strings.dart';
+import 'package:si_jaja/src/ui/widgets/toast.dart';
 import 'package:stacked/stacked.dart';
 
 class PlanViewModel extends FutureViewModel {
@@ -56,9 +57,11 @@ class PlanViewModel extends FutureViewModel {
       setBusy(true);
       var result = await _planService.fetchDetail(id);
       plan = result?.data;
-      budget = formatCurrency.format(result?.data?.budget);
+      var budgetData = double.parse(result?.data?.budget ?? '');
+      var costData = double.parse(result?.data?.execution?.cost ?? '');
+      budget = formatCurrency.format(budgetData);
       if (result?.data?.execution != null)
-        cost = formatCurrency.format(result?.data?.execution?.cost);
+        cost = formatCurrency.format(costData);
       setBusy(false);
       return result;
     } else
@@ -98,14 +101,65 @@ class PlanViewModel extends FutureViewModel {
     if (dataImages.length > 0) {
       for (var i = 0; i < dataImages.length; i++) {
         final byteData = await images[i].getByteData();
-        var fileImage = File('${(await getTemporaryDirectory()).path}/${images[i].name}');
-        final file = await fileImage.writeAsBytes(
-            byteData.buffer
-                .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+        var fileImage =
+            File('${(await getTemporaryDirectory()).path}/${images[i].name}');
+        final file = await fileImage.writeAsBytes(byteData.buffer
+            .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
         var base64Image = base64Encode(file.readAsBytesSync());
-        print('Data: $base64Image');
         addImages.add(base64Image);
       }
     }
+  }
+
+  void validate() {
+    roadWidthValidate = false;
+    roadLengthValidate = false;
+    costValidate = false;
+    executorValidate = false;
+    executorContactValidate = false;
+    supervisorValidate = false;
+    if (roadWidthController.text.isEmpty)
+      roadWidthValidate = true;
+    else if (roadLengthController.text.isEmpty)
+      roadLengthValidate = true;
+    else if (costController.text.isEmpty)
+      costValidate = true;
+    else if (executorController.text.isEmpty)
+      executorValidate = true;
+    else if (executorContactController.text.isEmpty)
+      executorContactValidate = true;
+    else if (supervisorController.text.isEmpty)
+      supervisorValidate = true;
+    else if (startDate == null)
+      CustomToast.show(Strings.errorEmptyStartDate);
+    else if (endDate == null)
+      CustomToast.show(Strings.errorEmptyEndDate);
+    else execution();
+    notifyListeners();
+  }
+
+  Future execution() async {
+    final hasConnection = await ConnectionHelper.hasConnection();
+
+    if (hasConnection) {
+      setBusy(true);
+      var result = await _planService.execution(
+        id,
+        roadWidthController.text,
+        roadLengthController.text,
+        costController.text,
+        executorController.text,
+        executorContactController.text,
+        startDate ?? '',
+        endDate ?? '',
+        supervisorController.text,
+        addImages,
+      );
+      getPlan();
+      setBusy(false);
+      return result;
+    } else
+      ConnectionHelper.showNotConnectionSnackBar();
+    notifyListeners();
   }
 }
