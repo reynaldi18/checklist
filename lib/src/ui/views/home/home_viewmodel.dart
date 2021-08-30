@@ -74,4 +74,9 @@ class HomeViewModel extends MultipleFutureViewModel {
       ConnectionHelper.showNotConnectionSnackBar();
     notifyListeners();
   }
+
+  void viewPlan(int id) => _navigationService.navigateTo(
+    Routes.planView,
+    arguments: PlanViewArguments(id: id),
+  );
 }

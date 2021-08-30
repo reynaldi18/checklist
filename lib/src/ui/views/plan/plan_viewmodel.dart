@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/helpers/connection_helper.dart';
 import 'package:si_jaja/src/models/plan.dart';
@@ -43,7 +42,8 @@ class PlanViewModel extends FutureViewModel {
   String? endDate;
 
   List<Asset> images = <Asset>[];
-  List<String>? addImages;
+  List<File> imagesView = [];
+  List<String> addImages = [];
 
   @override
   Future futureToRun() => getPlan();
@@ -90,10 +90,6 @@ class PlanViewModel extends FutureViewModel {
       print(e);
     }
     images = resultList;
-    for (var i = 0; i < images.length; i++) {
-      print('IMAGES: ${images[i].identifier}');
-      print('NAME: ${images[i].name}');
-    }
     encodeImage(images);
     notifyListeners();
   }
@@ -101,11 +97,14 @@ class PlanViewModel extends FutureViewModel {
   Future encodeImage(List<Asset> dataImages) async {
     if (dataImages.length > 0) {
       for (var i = 0; i < dataImages.length; i++) {
-        ByteData bytes = await rootBundle.load(images[i].name ?? '');
-        var buffer = bytes.buffer;
-        var img64 = base64.encode(Uint8List.view(buffer));
-        print('Data: $img64');
-        addImages?.add(img64);
+        final byteData = await images[i].getByteData();
+        var fileImage = File('${(await getTemporaryDirectory()).path}/${images[i].name}');
+        final file = await fileImage.writeAsBytes(
+            byteData.buffer
+                .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+        var base64Image = base64Encode(file.readAsBytesSync());
+        print('Data: $base64Image');
+        addImages.add(base64Image);
       }
     }
   }

@@ -349,8 +349,15 @@ class _PlanViewState extends State<PlanView> {
                                         )
                                       : Container(),
                                   TextButton(
-                                      onPressed: () => vm.loadAssets(),
-                                      child: Text('Masukan gambar'))
+                                    onPressed: () => vm.loadAssets(),
+                                    child: Text(
+                                      Strings.labelInsertImage,
+                                      style: blackTextStyle.copyWith(
+                                          fontSize: SDP.sdp(12),
+                                          fontWeight: FontWeight.bold,
+                                          color: mainColor),
+                                    ),
+                                  )
                                 ],
                               )
                             : Column(

@@ -27,6 +27,7 @@ class Strings {
   static const String labelEndDate = 'Tanggal Akhir';
   static const String labelSupervisor = 'Konsultan Pengawas';
   static const String labelImage = 'Foto';
+  static const String labelInsertImage = 'Masukan Foto';
 
   static const String hintEmail = 'Email';
   static const String hintPassword = 'Password';

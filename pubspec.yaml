@@ -76,6 +76,7 @@ dependencies:
 
   # image picker
   multi_image_picker2: ^5.0.2
+  path_provider: ^2.0.2
 
 dev_dependencies:
   flutter_test:

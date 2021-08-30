@@ -13,8 +13,6 @@ abstract class ApiService {
   factory ApiService(Dio dio, {String? baseUrl}) {
     String? token = HttpHelper().getToken();
     dio.options = BaseOptions(
-      receiveTimeout: 5000,
-      connectTimeout: 5000,
       headers: {
         'Content-Type': 'application/json',
         if (token != null) 'Authorization': token,
