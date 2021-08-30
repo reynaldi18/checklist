@@ -16,18 +16,17 @@ class _ApiService implements ApiService {
   String? baseUrl;
 
   @override
-  Future<AuthRes> auth(body) async {
+  Future<Auth> auth(body) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = <String, dynamic>{};
     _data.addAll(body);
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<AuthRes>(
-            Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
-                .compose(_dio.options, '/oauth/token',
-                    queryParameters: queryParameters, data: _data)
-                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
-    final value = AuthRes.fromJson(_result.data!);
+    final _result = await _dio.fetch<Map<String, dynamic>>(_setStreamType<Auth>(
+        Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
+            .compose(_dio.options, '/oauth/token',
+                queryParameters: queryParameters, data: _data)
+            .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = Auth.fromJson(_result.data!);
     return value;
   }
 

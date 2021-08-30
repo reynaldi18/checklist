@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/app/app.router.dart';
 import 'package:si_jaja/src/helpers/connection_helper.dart';
-import 'package:si_jaja/src/network/responses/auth_res.dart';
+import 'package:si_jaja/src/models/auth.dart';
 import 'package:si_jaja/src/services/user_service.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -16,7 +16,7 @@ class LoginViewModel extends BaseViewModel {
   bool emailValidate = false;
   bool passwordValidate = false;
 
-  Future<AuthRes?> login() async {
+  Future<Auth?> login() async {
     final hasConnection = await ConnectionHelper.hasConnection();
 
     emailValidate = false;
@@ -33,6 +33,7 @@ class LoginViewModel extends BaseViewModel {
           passwordController.text,
         );
         if (result?.accessToken != null) dashboard();
+        else print('Error: ${result?.errorDescription}');
         setBusy(false);
         return result;
       } else

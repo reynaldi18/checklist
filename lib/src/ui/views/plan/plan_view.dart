@@ -330,56 +330,27 @@ class _PlanViewState extends State<PlanView> {
                                   verticalSpace(SDP.sdp(2)),
                                   vm.images.isNotEmpty
                                       ? GridView.count(
-                                    shrinkWrap: true,
+                                          shrinkWrap: true,
                                           crossAxisCount: 3,
                                           children: List.generate(
                                               vm.images.length, (index) {
                                             Asset asset = vm.images[index];
-                                            return AssetThumb(
-                                              asset: asset,
-                                              width: 300,
-                                              height: 300,
+                                            return Padding(
+                                              padding: EdgeInsets.all(
+                                                SDP.sdp(8),
+                                              ),
+                                              child: AssetThumb(
+                                                asset: asset,
+                                                width: 300,
+                                                height: 300,
+                                              ),
                                             );
                                           }),
                                         )
-                                      : TextButton(
-                                          onPressed: () async {
-                                            List<Asset> resultList = <Asset>[];
-                                            String error = 'No Error Detected';
-
-                                            try {
-                                              resultList =
-                                                  await MultiImagePicker
-                                                      .pickImages(
-                                                maxImages: 300,
-                                                enableCamera: true,
-                                                selectedAssets: vm.images,
-                                                cupertinoOptions:
-                                                    CupertinoOptions(
-                                                  takePhotoIcon: "chat",
-                                                  doneButtonTitle: "Fatto",
-                                                ),
-                                                materialOptions:
-                                                    MaterialOptions(
-                                                  actionBarColor: "#abcdef",
-                                                  actionBarTitle:
-                                                      Strings.labelApp,
-                                                  allViewTitle: "All Photos",
-                                                  useDetailsView: false,
-                                                  selectCircleStrokeColor:
-                                                      "#000000",
-                                                ),
-                                              );
-                                            } on Exception catch (e) {
-                                              error = e.toString();
-                                            }
-
-                                            setState(() {
-                                              vm.images = resultList;
-                                              vm.errorImage = error;
-                                            });
-                                          },
-                                          child: Text('Masukan gambar'))
+                                      : Container(),
+                                  TextButton(
+                                      onPressed: () => vm.loadAssets(),
+                                      child: Text('Masukan gambar'))
                                 ],
                               )
                             : Column(

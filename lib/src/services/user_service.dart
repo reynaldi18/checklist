@@ -6,10 +6,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/constant/session.dart';
 import 'package:si_jaja/src/helpers/storage/shared_preferences_manager.dart';
+import 'package:si_jaja/src/models/auth.dart';
 import 'package:si_jaja/src/models/user.dart';
 import 'package:si_jaja/src/network/api_service.dart';
 import 'package:si_jaja/src/network/requests/login_req.dart';
-import 'package:si_jaja/src/network/responses/auth_res.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
 import 'package:stacked/stacked_annotations.dart';
 
@@ -20,7 +20,36 @@ class UserService {
   final SharedPreferencesManager _sharedPreferencesManager =
       locator<SharedPreferencesManager>();
 
-  Future<AuthRes?> login(
+  Response? response;
+  var dio = Dio();
+
+  /*Future<AuthRes?> login(
+    String email,
+    String password,
+  ) async {
+    try {
+      final Map<String, dynamic> req = LoginReq(
+        email,
+        password,
+      ).toJson();
+      response = await dio.post(
+          'https://private-740f65-sijaja.apiary-mock.com/oauth/token',
+          data: req);
+      print('DATA: $response');
+      var data = json.decode(response.toString());
+      if (response?.statusCode != 200) {
+        Auth auth = Auth.fromJson(data);
+        return AuthRes(auth: auth);
+      } else {
+        Error error = Error.fromJson(data);
+        return AuthRes(error: error);
+      }
+    } catch (e) {
+      print(e);
+    }
+  }*/
+
+  Future<Auth?> login(
     String email,
     String password,
   ) async {
@@ -30,11 +59,13 @@ class UserService {
         password,
       ).toJson();
       final data = await apiService.auth(req);
-      _sharedPreferencesManager.putString(
-        Session.token,
-        data.accessToken ?? '',
-      );
-      fetchUser();
+      if (data.accessToken != null) {
+        _sharedPreferencesManager.putString(
+          Session.token,
+          data.accessToken ?? '',
+        );
+        fetchUser();
+      }
       return data;
     } catch (e) {
       print(e);

@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:retrofit/http.dart';
 import 'package:si_jaja/src/helpers/http/http_helper.dart';
+import 'package:si_jaja/src/models/auth.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/models/user.dart';
-import 'package:si_jaja/src/network/responses/auth_res.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
 
 part 'api_service.g.dart';
@@ -25,7 +25,7 @@ abstract class ApiService {
   }
 
   @POST("/oauth/token")
-  Future<AuthRes> auth(@Body() Map<String, dynamic> body);
+  Future<Auth> auth(@Body() Map<String, dynamic> body);
 
   @GET("/user")
   Future<CoreRes<User>> getUser();
