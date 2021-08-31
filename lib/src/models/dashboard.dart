@@ -5,9 +5,9 @@ part 'dashboard.g.dart';
 @JsonSerializable()
 class Dashboard {
   @JsonKey(name: 'budget')
-  String? budget;
+  double? budget;
   @JsonKey(name: 'cost')
-  String? cost;
+  double? cost;
   @JsonKey(name: 'planning')
   int? planning;
   @JsonKey(name: 'ongoing')

@@ -91,10 +91,10 @@ class HomeViewModel extends MultipleFutureViewModel {
 
     if (hasConnection) {
       final result = await _planService.fetchSummaries();
-      var budgetData = double.parse(result?.data?.budget ?? '');
-      var costData = double.parse(result?.data?.cost ?? '');
-      budget = formatCurrency.format(budgetData);
-      cost = formatCurrency.format(costData);
+      // var budgetData = double.parse(result?.data?.budget ?? '');
+      // var costData = double.parse(result?.data?.cost ?? '');
+      budget = formatCurrency.format(result?.data?.budget);
+      cost = formatCurrency.format(result?.data?.cost);
       notifyListeners();
       return result?.data;
     } else

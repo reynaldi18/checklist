@@ -162,7 +162,7 @@ class _PlanViewState extends State<PlanView> {
                           ),
                         ),
                         Text(
-                          vm.plan?.budget ?? '',
+                          vm.budget ?? '',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: blackTextStyle.copyWith(
@@ -517,7 +517,7 @@ class _PlanViewState extends State<PlanView> {
                                   ),
                                   verticalSpace(SDP.sdp(2)),
                                   Text(
-                                    vm.plan?.execution?.cost ?? '',
+                                    vm.cost ?? '',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: blackTextStyle.copyWith(

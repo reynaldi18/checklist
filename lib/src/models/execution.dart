@@ -5,11 +5,11 @@ part 'execution.g.dart';
 @JsonSerializable()
 class Execution {
   @JsonKey(name: 'width')
-  String? width;
+  double? width;
   @JsonKey(name: 'length')
-  String? length;
+  double? length;
   @JsonKey(name: 'cost')
-  String? cost;
+  double? cost;
   @JsonKey(name: 'executor')
   String? executor;
   @JsonKey(name: 'executor_contact')

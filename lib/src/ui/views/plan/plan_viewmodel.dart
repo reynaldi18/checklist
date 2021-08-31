@@ -57,11 +57,11 @@ class PlanViewModel extends FutureViewModel {
       setBusy(true);
       var result = await _planService.fetchDetail(id);
       plan = result?.data;
-      var budgetData = double.parse(result?.data?.budget ?? '');
-      var costData = double.parse(result?.data?.execution?.cost ?? '');
-      budget = formatCurrency.format(budgetData);
+      // var budgetData = double.parse(result?.data?.budget ?? '');
+      // var costData = double.parse(result?.data?.execution?.cost ?? '');
+      budget = formatCurrency.format(result?.data?.budget);
       if (result?.data?.execution != null)
-        cost = formatCurrency.format(costData);
+        cost = formatCurrency.format(result?.data?.execution?.cost);
       setBusy(false);
       return result;
     } else
@@ -106,6 +106,7 @@ class PlanViewModel extends FutureViewModel {
         final file = await fileImage.writeAsBytes(byteData.buffer
             .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
         var base64Image = base64Encode(file.readAsBytesSync());
+        print('DATA: $base64Image');
         addImages.add(base64Image);
       }
     }

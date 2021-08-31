@@ -8,8 +8,8 @@ part of 'dashboard.dart';
 
 Dashboard _$DashboardFromJson(Map<String, dynamic> json) {
   return Dashboard(
-    budget: json['budget'] as String?,
-    cost: json['cost'] as String?,
+    budget: (json['budget'] as num?)?.toDouble(),
+    cost: (json['cost'] as num?)?.toDouble(),
     planning: json['planning'] as int?,
     ongoing: json['ongoing'] as int?,
   );

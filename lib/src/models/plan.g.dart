@@ -12,9 +12,9 @@ Plan _$PlanFromJson(Map<String, dynamic> json) {
     name: json['name'] as String?,
     address: json['address'] as String?,
     status: json['status'] as String?,
-    width: json['width'] as String?,
-    length: json['length'] as String?,
-    budget: json['budget'] as String?,
+    width: (json['width'] as num?)?.toDouble(),
+    length: (json['length'] as num?)?.toDouble(),
+    budget: (json['budget'] as num?)?.toDouble(),
     execution: json['execution'] == null
         ? null
         : Execution.fromJson(json['execution'] as Map<String, dynamic>),

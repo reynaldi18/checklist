@@ -14,11 +14,11 @@ class Plan {
   @JsonKey(name: 'status')
   String? status;
   @JsonKey(name: 'width')
-  String? width;
+  double? width;
   @JsonKey(name: 'length')
-  String? length;
+  double? length;
   @JsonKey(name: 'budget')
-  String? budget;
+  double? budget;
   @JsonKey(name: 'execution')
   Execution? execution;
 

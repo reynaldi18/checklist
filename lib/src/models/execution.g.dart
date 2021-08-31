@@ -8,9 +8,9 @@ part of 'execution.dart';
 
 Execution _$ExecutionFromJson(Map<String, dynamic> json) {
   return Execution(
-    width: json['width'] as String?,
-    length: json['length'] as String?,
-    cost: json['cost'] as String?,
+    width: (json['width'] as num?)?.toDouble(),
+    length: (json['length'] as num?)?.toDouble(),
+    cost: (json['cost'] as num?)?.toDouble(),
     executor: json['executor'] as String?,
     executorContact: json['executor_contact'] as String?,
     startAt: json['start_at'] as String?,
