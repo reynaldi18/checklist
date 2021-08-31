@@ -42,6 +42,7 @@ class HistoryView extends StatelessWidget {
                     ),
                     child: TextField(
                       controller: vm.searchController,
+                      onSubmitted: (String str) => vm.histories(),
                       decoration: InputDecoration(
                         contentPadding: EdgeInsets.fromLTRB(
                           SDP.sdp(12),
