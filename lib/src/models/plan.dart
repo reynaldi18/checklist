@@ -13,10 +13,10 @@ class Plan {
   String? address;
   @JsonKey(name: 'status')
   String? status;
-  @JsonKey(name: 'road_width')
-  String? roadWidth;
-  @JsonKey(name: 'road_length')
-  String? roadLength;
+  @JsonKey(name: 'width')
+  String? width;
+  @JsonKey(name: 'length')
+  String? length;
   @JsonKey(name: 'budget')
   String? budget;
   @JsonKey(name: 'execution')
@@ -28,8 +28,8 @@ class Plan {
     this.name,
     this.address,
     this.status,
-    this.roadWidth,
-    this.roadLength,
+    this.width,
+    this.length,
     this.budget,
     this.execution,
   });

@@ -4,10 +4,10 @@ part 'execution.g.dart';
 
 @JsonSerializable()
 class Execution {
-  @JsonKey(name: 'road_width')
-  String? roadWidth;
-  @JsonKey(name: 'road_length')
-  String? roadLength;
+  @JsonKey(name: 'width')
+  String? width;
+  @JsonKey(name: 'length')
+  String? length;
   @JsonKey(name: 'cost')
   String? cost;
   @JsonKey(name: 'executor')
@@ -25,8 +25,8 @@ class Execution {
 
 
   Execution({
-    this.roadWidth,
-    this.roadLength,
+    this.width,
+    this.length,
     this.cost,
     this.executor,
     this.executorContact,

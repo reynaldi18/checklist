@@ -15,9 +15,7 @@ class HistoryViewModel extends FutureViewModel {
       new GlobalKey<RefreshIndicatorState>();
 
   TextEditingController searchController = TextEditingController();
-  bool searchValidate = false;
 
-  String? name;
   List<Plan>? plans;
 
   @override
@@ -28,7 +26,7 @@ class HistoryViewModel extends FutureViewModel {
 
     if (hasConnection) {
       setBusy(true);
-      var result = await _planService.fetchHistory(name);
+      var result = await _planService.fetchHistory(searchController.text);
       plans = result?.data;
       setBusy(false);
       return result;

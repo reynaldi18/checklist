@@ -8,8 +8,8 @@ part of 'execution.dart';
 
 Execution _$ExecutionFromJson(Map<String, dynamic> json) {
   return Execution(
-    roadWidth: json['road_width'] as String?,
-    roadLength: json['road_length'] as String?,
+    width: json['width'] as String?,
+    length: json['length'] as String?,
     cost: json['cost'] as String?,
     executor: json['executor'] as String?,
     executorContact: json['executor_contact'] as String?,
@@ -22,8 +22,8 @@ Execution _$ExecutionFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ExecutionToJson(Execution instance) => <String, dynamic>{
-      'road_width': instance.roadWidth,
-      'road_length': instance.roadLength,
+      'width': instance.width,
+      'length': instance.length,
       'cost': instance.cost,
       'executor': instance.executor,
       'executor_contact': instance.executorContact,

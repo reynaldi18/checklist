@@ -119,7 +119,7 @@ class _PlanViewState extends State<PlanView> {
                                 ),
                                 verticalSpace(SDP.sdp(2)),
                                 Text(
-                                  '${vm.plan?.roadWidth ?? ''} Meter',
+                                  '${vm.plan?.width ?? ''} Meter',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: blackTextStyle.copyWith(
@@ -141,7 +141,7 @@ class _PlanViewState extends State<PlanView> {
                                 ),
                                 verticalSpace(SDP.sdp(2)),
                                 Text(
-                                  '${vm.plan?.roadLength ?? ''} Meter',
+                                  '${vm.plan?.length ?? ''} Meter',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: blackTextStyle.copyWith(
@@ -162,7 +162,7 @@ class _PlanViewState extends State<PlanView> {
                           ),
                         ),
                         Text(
-                          vm.budget ?? '',
+                          vm.plan?.budget ?? '',
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: blackTextStyle.copyWith(
@@ -380,7 +380,7 @@ class _PlanViewState extends State<PlanView> {
                                           ),
                                           verticalSpace(SDP.sdp(2)),
                                           Text(
-                                            '${vm.plan?.execution?.roadWidth ?? ''} Meter',
+                                            '${vm.plan?.execution?.width ?? ''} Meter',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: blackTextStyle.copyWith(
@@ -439,7 +439,7 @@ class _PlanViewState extends State<PlanView> {
                                           ),
                                           verticalSpace(SDP.sdp(2)),
                                           Text(
-                                            '${vm.plan?.execution?.roadLength ?? ''} Meter',
+                                            '${vm.plan?.execution?.length ?? ''} Meter',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: blackTextStyle.copyWith(
@@ -517,7 +517,7 @@ class _PlanViewState extends State<PlanView> {
                                   ),
                                   verticalSpace(SDP.sdp(2)),
                                   Text(
-                                    vm.cost ?? '',
+                                    vm.plan?.execution?.cost ?? '',
                                     maxLines: 1,
                                     overflow: TextOverflow.ellipsis,
                                     style: blackTextStyle.copyWith(

@@ -53,6 +53,7 @@ class HistoryView extends StatelessWidget {
                             ? GestureDetector(
                                 onTap: () {
                                   FocusScope.of(context).unfocus();
+                                  vm.histories();
                                 },
                                 child: Icon(
                                   Icons.search,
@@ -62,6 +63,7 @@ class HistoryView extends StatelessWidget {
                             : GestureDetector(
                                 onTap: () {
                                   vm.searchController.clear();
+                                  vm.histories();
                                 },
                                 child: Icon(
                                   Icons.clear,

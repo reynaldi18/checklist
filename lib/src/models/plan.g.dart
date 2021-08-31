@@ -12,8 +12,8 @@ Plan _$PlanFromJson(Map<String, dynamic> json) {
     name: json['name'] as String?,
     address: json['address'] as String?,
     status: json['status'] as String?,
-    roadWidth: json['road_width'] as String?,
-    roadLength: json['road_length'] as String?,
+    width: json['width'] as String?,
+    length: json['length'] as String?,
     budget: json['budget'] as String?,
     execution: json['execution'] == null
         ? null
@@ -26,8 +26,8 @@ Map<String, dynamic> _$PlanToJson(Plan instance) => <String, dynamic>{
       'name': instance.name,
       'address': instance.address,
       'status': instance.status,
-      'road_width': instance.roadWidth,
-      'road_length': instance.roadLength,
+      'width': instance.width,
+      'length': instance.length,
       'budget': instance.budget,
       'execution': instance.execution,
     };
