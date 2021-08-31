@@ -96,4 +96,18 @@ class PlanService {
       print(e);
     }
   }
+
+  Future<CoreRes?> executionDone(int id) async {
+    try {
+      final data = await apiService
+          .done(id)
+          .then((value) => value)
+          .catchError((e) {
+        logger.e(e);
+      });
+      return data;
+    } catch (e) {
+      print(e);
+    }
+  }
 }

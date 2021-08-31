@@ -46,4 +46,7 @@ abstract class ApiService {
     @Path("id") int id,
     @Body() Map<String, dynamic> body,
   );
+
+  @POST("/api/progressions/{id}/done")
+  Future<CoreRes> done(@Path("id") int id);
 }

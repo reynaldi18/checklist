@@ -14,9 +14,9 @@ class Plan {
   @JsonKey(name: 'status')
   String? status;
   @JsonKey(name: 'road_width')
-  double? roadWidth;
+  String? roadWidth;
   @JsonKey(name: 'road_length')
-  double? roadLength;
+  String? roadLength;
   @JsonKey(name: 'budget')
   String? budget;
   @JsonKey(name: 'execution')

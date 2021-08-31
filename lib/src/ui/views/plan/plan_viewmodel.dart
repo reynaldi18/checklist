@@ -162,4 +162,18 @@ class PlanViewModel extends FutureViewModel {
       ConnectionHelper.showNotConnectionSnackBar();
     notifyListeners();
   }
+
+  Future executionDone() async {
+    final hasConnection = await ConnectionHelper.hasConnection();
+
+    if (hasConnection) {
+      setBusy(true);
+      var result = await _planService.executionDone(id);
+      getPlan();
+      setBusy(false);
+      return result;
+    } else
+      ConnectionHelper.showNotConnectionSnackBar();
+    notifyListeners();
+  }
 }

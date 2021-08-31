@@ -119,7 +119,7 @@ class _PlanViewState extends State<PlanView> {
                                 ),
                                 verticalSpace(SDP.sdp(2)),
                                 Text(
-                                  '${vm.plan?.roadWidth.toString() ?? ''} Meter',
+                                  '${vm.plan?.roadWidth ?? ''} Meter',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: blackTextStyle.copyWith(
@@ -141,7 +141,7 @@ class _PlanViewState extends State<PlanView> {
                                 ),
                                 verticalSpace(SDP.sdp(2)),
                                 Text(
-                                  '${vm.plan?.roadLength.toString() ?? ''} Meter',
+                                  '${vm.plan?.roadLength ?? ''} Meter',
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
                                   style: blackTextStyle.copyWith(
@@ -380,7 +380,7 @@ class _PlanViewState extends State<PlanView> {
                                           ),
                                           verticalSpace(SDP.sdp(2)),
                                           Text(
-                                            '${vm.plan?.execution?.roadWidth.toString() ?? ''} Meter',
+                                            '${vm.plan?.execution?.roadWidth ?? ''} Meter',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: blackTextStyle.copyWith(
@@ -439,7 +439,7 @@ class _PlanViewState extends State<PlanView> {
                                           ),
                                           verticalSpace(SDP.sdp(2)),
                                           Text(
-                                            '${vm.plan?.execution?.roadLength.toString() ?? ''} Meter',
+                                            '${vm.plan?.execution?.roadLength ?? ''} Meter',
                                             maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                             style: blackTextStyle.copyWith(
@@ -585,15 +585,15 @@ class _PlanViewState extends State<PlanView> {
                                 ],
                               ),
                         verticalSpace(SDP.sdp(defaultPadding)),
-                        vm.plan?.execution == null
+                        vm.plan?.status == Config.planning
                             ? CustomButton(
                                 label: Strings.labelOnProgress.toUpperCase(),
                                 onPress: () => vm.validate(),
                               )
-                            : CustomButton(
+                            : vm.plan?.status == Config.ongoing ? CustomButton(
                                 label: Strings.labelDone.toUpperCase(),
-                                onPress: () {},
-                              ),
+                                onPress: () => vm.executionDone(),
+                              ) : Container(),
                       ],
                     ),
                   ),
