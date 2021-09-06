@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:advance_image_picker/advance_image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -348,8 +351,43 @@ class _PlanViewState extends State<PlanView> {
                                           }),
                                         )
                                       : Container(),
+                                  GridView.builder(
+                                      shrinkWrap: true,
+                                      itemCount: vm.imgObject.length,
+                                      gridDelegate:
+                                      const SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 4,
+                                          mainAxisSpacing: 2,
+                                          crossAxisSpacing: 2,
+                                          childAspectRatio: 1),
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        var image = vm.imgObject[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.all(2.0),
+                                          child: Image.file(
+                                              File(image.modifiedPath),
+                                              height: 80,
+                                              fit: BoxFit.cover),
+                                        );
+                                      }),
                                   TextButton(
-                                    onPressed: () => vm.loadAssets(),
+                                    onPressed: () async {
+                                      // Get max 5 images
+                                      List<ImageObject>? objects = await Navigator.of(context)
+                                          .push(PageRouteBuilder(pageBuilder: (context, animation, __) {
+                                        return const ImagePicker(maxCount: 5, isCaptureFirst: true);
+                                      }));
+
+                                      if ((objects?.length ?? 0) > 0) {
+                                        setState(() {
+                                          vm.imgObject = objects!;
+                                          vm.imgObject.asMap().forEach((key, value) {
+                                            vm.addImages.add(File(value.originalPath));
+                                          });
+                                        });
+                                      }
+                                    },
                                     child: Text(
                                       Strings.labelInsertImage,
                                       style: blackTextStyle.copyWith(
@@ -590,10 +628,12 @@ class _PlanViewState extends State<PlanView> {
                                 label: Strings.labelOnProgress.toUpperCase(),
                                 onPress: () => vm.validate(),
                               )
-                            : vm.plan?.status == Config.ongoing ? CustomButton(
-                                label: Strings.labelDone.toUpperCase(),
-                                onPress: () => vm.executionDone(),
-                              ) : Container(),
+                            : vm.plan?.status == Config.ongoing
+                                ? CustomButton(
+                                    label: Strings.labelDone.toUpperCase(),
+                                    onPress: () => vm.executionDone(),
+                                  )
+                                : Container(),
                       ],
                     ),
                   ),

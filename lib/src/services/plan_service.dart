@@ -1,14 +1,16 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:advance_image_picker/models/image_object.dart';
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:si_jaja/src/helpers/http/http_helper.dart';
 import 'package:si_jaja/src/models/dashboard.dart';
+import 'package:si_jaja/src/models/id.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/network/api_service.dart';
 import 'package:si_jaja/src/network/requests/execution_req.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
+import 'package:si_jaja/src/network/responses/upload_res.dart';
 import 'package:stacked/stacked_annotations.dart';
 
 @LazySingleton()
@@ -70,7 +72,7 @@ class PlanService {
     }
   }
 
-  Future<CoreRes?> execution(
+  Future<CoreRes<Id>?> execution(
     int id,
     String width,
     String length,
@@ -101,10 +103,8 @@ class PlanService {
 
   Future<CoreRes?> executionDone(int id) async {
     try {
-      final data = await apiService
-          .done(id)
-          .then((value) => value)
-          .catchError((e) {
+      final data =
+          await apiService.done(id).then((value) => value).catchError((e) {
         logger.e(e);
       });
       return data;
@@ -113,15 +113,16 @@ class PlanService {
     }
   }
 
-  Future<CoreRes?> uploadImages(int id, List<File> images) async {
-    try{
+  Future<UploadRes?> uploadImages(int id, List<ImageObject> images) async {
+    try {
       String? token = HttpHelper().getToken();
 
       Map<String, dynamic> bodyReq = {};
 
       images.asMap().forEach((key, value) {
-        MultipartFile file = MultipartFile.fromFileSync(value.path);
+        MultipartFile file = MultipartFile.fromFileSync(value.originalPath);
         bodyReq.addAll({'images[$key]': file});
+        print('Image: ${value.originalPath}');
       });
 
       print('REQ: $bodyReq');
@@ -133,19 +134,22 @@ class PlanService {
         'http://116.193.191.117:8000/api/progressions/$id/upload',
         data: formData,
         options: Options(
-          headers: {
-            "Authorization": "Bearer $token"
-          },
+          contentType: "multipart/form-data",
+          headers: {"Authorization": "Bearer $token"},
+          followRedirects: false,
         ),
       );
 
+      print(response.statusCode);
+
       var data = json.decode(response.toString());
 
-      CoreRes resp = CoreRes.fromJson(data, (json) => json as dynamic,);
+      print('DATA: $data');
+
+      UploadRes resp = UploadRes.fromJson(data);
 
       return resp;
-    }
-    catch (e) {
+    } catch (e) {
       print(e);
     }
   }

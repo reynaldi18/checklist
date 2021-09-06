@@ -1,10 +1,9 @@
-import 'dart:convert';
 import 'dart:io';
 
+import 'package:advance_image_picker/advance_image_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/helpers/connection_helper.dart';
 import 'package:si_jaja/src/models/plan.dart';
@@ -44,6 +43,7 @@ class PlanViewModel extends FutureViewModel {
 
   List<Asset> images = <Asset>[];
   List<File> addImages = [];
+  List<ImageObject> imgObject = [];
 
   @override
   Future futureToRun() => getPlan();
@@ -56,8 +56,6 @@ class PlanViewModel extends FutureViewModel {
       setBusy(true);
       var result = await _planService.fetchDetail(id);
       plan = result?.data;
-      // var budgetData = double.parse(result?.data?.budget ?? '');
-      // var costData = double.parse(result?.data?.execution?.cost ?? '');
       budget = formatCurrency.format(result?.data?.budget);
       if (result?.data?.execution != null)
         cost = formatCurrency.format(result?.data?.execution?.cost);
@@ -102,12 +100,8 @@ class PlanViewModel extends FutureViewModel {
   Future encodeImage(List<Asset> dataImages) async {
     if (dataImages.length > 0) {
       for (var i = 0; i < dataImages.length; i++) {
-        final byteData = await images[i].getByteData();
         var fileImage =
             File('${images[i].identifier}');
-        // final file = await fileImage.writeAsBytes(byteData.buffer
-        //     .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-        // var base64Image = base64Encode(file.readAsBytesSync());
         print('DATA: $fileImage');
         addImages.add(fileImage);
       }
@@ -137,17 +131,18 @@ class PlanViewModel extends FutureViewModel {
       CustomToast.show(Strings.errorEmptyStartDate);
     else if (endDate == null)
       CustomToast.show(Strings.errorEmptyEndDate);
-    else upload();
+    else execution();
     notifyListeners();
   }
-  
-  Future upload() async {
+
+  Future upload(int executionId) async {
     final hasConnection = await ConnectionHelper.hasConnection();
 
     if (hasConnection) {
       setBusy(true);
-      var result = await _planService.uploadImages(id, addImages);
-      if (result?.success == true) execution();
+      var result = await _planService.uploadImages(executionId, imgObject);
+      getPlan();
+      setBusy(false);
       return result;
     }
     else ConnectionHelper.showNotConnectionSnackBar();
@@ -170,7 +165,7 @@ class PlanViewModel extends FutureViewModel {
         endDate ?? '',
         supervisorController.text,
       );
-      getPlan();
+      if (result?.success == true) upload(result?.data?.id ?? 0);
       setBusy(false);
       return result;
     } else

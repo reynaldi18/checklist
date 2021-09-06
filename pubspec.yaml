@@ -76,8 +76,9 @@ dependencies:
 
   # image picker
   multi_image_picker2: ^5.0.2
-  path_provider: ^2.0.2
+  path_provider: ^2.0.3
   image_picker: ^0.8.4
+  advance_image_picker: ^0.1.2
 
   # toast
   fluttertoast: ^8.0.8
@@ -86,7 +87,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
-  build_runner: ^2.1.1
+  build_runner: ^2.1.2
   stacked_generator: any
   retrofit_generator: any
   json_serializable: any
