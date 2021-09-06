@@ -4,6 +4,8 @@ part 'execution.g.dart';
 
 @JsonSerializable()
 class Execution {
+  @JsonKey(name: 'id')
+  int? id;
   @JsonKey(name: 'width')
   double? width;
   @JsonKey(name: 'length')
@@ -25,6 +27,7 @@ class Execution {
 
 
   Execution({
+    this.id,
     this.width,
     this.length,
     this.cost,

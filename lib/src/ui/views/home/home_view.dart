@@ -28,7 +28,7 @@ class _HomeViewState extends State<HomeView> {
       builder: (context, vm, child) => Scaffold(
         backgroundColor: white,
         body: SafeArea(
-          child: vm.fetchingPlanning || vm.fetchingOngoing
+          child: vm.isBusy == true
               ? SpinKitFadingCircle(
                   size: SDP.sdp(defaultSize),
                   color: mainColor,
@@ -37,7 +37,7 @@ class _HomeViewState extends State<HomeView> {
                   ? RefreshIndicator(
                       key: vm.refreshIndicatorKey,
                       onRefresh: () => vm.refresh(),
-                      child: vm.dataMap!.isNotEmpty
+                      child: vm.dataReady
                           ? ListView(
                               children: [
                                 Container(
@@ -75,52 +75,47 @@ class _HomeViewState extends State<HomeView> {
                                                       children: [
                                                         Row(
                                                           mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
+                                                              MainAxisAlignment
+                                                                  .center,
                                                           children: [
                                                             Text(
-                                                              vm.fetchSummaries
-                                                                  ?.planning
-                                                                  .toString() ??
+                                                              vm.data?.planning
+                                                                      .toString() ??
                                                                   '-',
                                                               style:
-                                                              mainTextStyle
-                                                                  .copyWith(
+                                                                  mainTextStyle
+                                                                      .copyWith(
                                                                 fontSize:
-                                                                SDP.sdp(14),
+                                                                    SDP.sdp(14),
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .w700,
+                                                                    FontWeight
+                                                                        .w700,
                                                               ),
                                                             ),
                                                             horizontalSpace(
                                                                 SDP.sdp(4)),
                                                             Text(
-                                                              Strings
-                                                                  .labelPlan,
+                                                              Strings.labelPlan,
                                                               style:
-                                                              blackTextStyle
-                                                                  .copyWith(
+                                                                  blackTextStyle
+                                                                      .copyWith(
                                                                 fontSize:
-                                                                SDP.sdp(10),
+                                                                    SDP.sdp(10),
                                                                 fontWeight:
-                                                                FontWeight
-                                                                    .w400,
+                                                                    FontWeight
+                                                                        .w400,
                                                               ),
                                                             ),
                                                           ],
                                                         ),
                                                         Text(
-                                                          vm.budget ??
-                                                              '-',
-                                                          style:
-                                                          mainTextStyle
+                                                          vm.budget ?? '-',
+                                                          style: mainTextStyle
                                                               .copyWith(
                                                             fontSize:
-                                                            SDP.sdp(10),
+                                                                SDP.sdp(10),
                                                             fontWeight:
-                                                            FontWeight
-                                                                .w700,
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
                                                       ],
@@ -141,8 +136,7 @@ class _HomeViewState extends State<HomeView> {
                                                                   .center,
                                                           children: [
                                                             Text(
-                                                              vm.fetchSummaries
-                                                                      ?.ongoing
+                                                              vm.data?.ongoing
                                                                       .toString() ??
                                                                   '-',
                                                               style:
@@ -173,16 +167,13 @@ class _HomeViewState extends State<HomeView> {
                                                           ],
                                                         ),
                                                         Text(
-                                                          vm.cost ??
-                                                              '-',
-                                                          style:
-                                                          mainTextStyle
+                                                          vm.cost ?? '-',
+                                                          style: mainTextStyle
                                                               .copyWith(
                                                             fontSize:
-                                                            SDP.sdp(10),
+                                                                SDP.sdp(10),
                                                             fontWeight:
-                                                            FontWeight
-                                                                .w700,
+                                                                FontWeight.w700,
                                                           ),
                                                         ),
                                                       ],
@@ -203,6 +194,7 @@ class _HomeViewState extends State<HomeView> {
                                   onTap: (index) {
                                     setState(() {
                                       vm.selectedIndex = index;
+                                      vm.getPlans();
                                     });
                                   },
                                 ),
@@ -210,65 +202,93 @@ class _HomeViewState extends State<HomeView> {
                                 vm.selectedIndex == 0
                                     ? Container(
                                         color: white,
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: SDP.sdp(defaultPadding),
-                                          ),
-                                          child: vm.fetchPlanning!.isNotEmpty
-                                              ? Column(
-                                                  children: vm.fetchPlanning!
-                                                      .map((item) =>
-                                                          GestureDetector(
-                                                            onTap: () =>
-                                                                vm.viewPlan(
-                                                                    item.id ??
-                                                                        0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .only(
-                                                                bottom: SDP.sdp(
-                                                                    defaultPaddingSmall),
-                                                              ),
-                                                              child: PlanCard(
-                                                                  plan: item),
-                                                            ),
-                                                          ))
-                                                      .toList(),
-                                                )
-                                              : EmptyView(),
-                                        ),
+                                        child: vm.loadingTab == true
+                                            ? Container(
+                                                height: screenHeightPercentage(
+                                                  context,
+                                                  percentage: 0.5,
+                                                ),
+                                                child: SpinKitFadingCircle(
+                                                  size: SDP.sdp(defaultSize),
+                                                  color: mainColor,
+                                                ),
+                                              )
+                                            : Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      SDP.sdp(defaultPadding),
+                                                ),
+                                                child:
+                                                    vm.planPlanning!.isNotEmpty
+                                                        ? Column(
+                                                            children: vm
+                                                                .planPlanning!
+                                                                .map((item) =>
+                                                                    GestureDetector(
+                                                                      onTap: () =>
+                                                                          vm.viewPlan(item.id ??
+                                                                              0),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.only(
+                                                                          bottom:
+                                                                              SDP.sdp(defaultPaddingSmall),
+                                                                        ),
+                                                                        child: PlanCard(
+                                                                            plan:
+                                                                                item),
+                                                                      ),
+                                                                    ))
+                                                                .toList(),
+                                                          )
+                                                        : EmptyView(),
+                                              ),
                                       )
                                     : Container(
                                         color: white,
-                                        child: Padding(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: SDP.sdp(defaultPadding),
-                                          ),
-                                          child: vm.fetchPlanning!.isNotEmpty
-                                              ? Column(
-                                                  children: vm.fetchOngoing!
-                                                      .map((item) =>
-                                                          GestureDetector(
-                                                            onTap: () =>
-                                                                vm.viewPlan(
-                                                                    item.id ??
-                                                                        0),
-                                                            child: Padding(
-                                                              padding:
-                                                                  EdgeInsets
-                                                                      .only(
-                                                                bottom: SDP.sdp(
-                                                                    defaultPaddingSmall),
-                                                              ),
-                                                              child: PlanCard(
-                                                                  plan: item),
-                                                            ),
-                                                          ))
-                                                      .toList(),
-                                                )
-                                              : EmptyView(),
-                                        ),
+                                        child: vm.loadingTab == true
+                                            ? Container(
+                                                height: screenHeightPercentage(
+                                                  context,
+                                                  percentage: 0.5,
+                                                ),
+                                                child: SpinKitFadingCircle(
+                                                  size: SDP.sdp(defaultSize),
+                                                  color: mainColor,
+                                                ),
+                                              )
+                                            : Padding(
+                                                padding: EdgeInsets.symmetric(
+                                                  horizontal:
+                                                      SDP.sdp(defaultPadding),
+                                                ),
+                                                child:
+                                                    vm.planOngoing!.isNotEmpty
+                                                        ? Column(
+                                                            children: vm
+                                                                .planOngoing!
+                                                                .map((item) =>
+                                                                    GestureDetector(
+                                                                      onTap: () =>
+                                                                          vm.viewPlan(item.id ??
+                                                                              0),
+                                                                      child:
+                                                                          Padding(
+                                                                        padding:
+                                                                            EdgeInsets.only(
+                                                                          bottom:
+                                                                              SDP.sdp(defaultPaddingSmall),
+                                                                        ),
+                                                                        child: PlanCard(
+                                                                            plan:
+                                                                                item),
+                                                                      ),
+                                                                    ))
+                                                                .toList(),
+                                                          )
+                                                        : EmptyView(),
+                                              ),
                                       ),
                               ],
                             )

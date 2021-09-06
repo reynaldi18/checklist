@@ -5,7 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
 import 'package:si_jaja/src/helpers/http/http_helper.dart';
 import 'package:si_jaja/src/models/dashboard.dart';
-import 'package:si_jaja/src/models/id.dart';
+import 'package:si_jaja/src/models/execution.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/network/api_service.dart';
 import 'package:si_jaja/src/network/requests/execution_req.dart';
@@ -72,7 +72,7 @@ class PlanService {
     }
   }
 
-  Future<CoreRes<Id>?> execution(
+  Future<CoreRes<Execution>?> execution(
     int id,
     String width,
     String length,
@@ -85,16 +85,17 @@ class PlanService {
   ) async {
     try {
       final Map<String, dynamic> req = ExecutionReq(
-        width: width,
-        length: length,
-        cost: cost,
-        executor: executor,
-        executorContact: executorContact,
-        startAt: startAt,
-        endAt: endAt,
-        supervisor: supervisor,
-      ).toJson();
+          width: width,
+          length: length,
+          cost: cost,
+          executor: executor,
+          executorContact: executorContact,
+          startAt: startAt,
+          endAt: endAt,
+          supervisor: supervisor,
+          images: []).toJson();
       final data = await apiService.execution(id, req);
+      print('DATA: $data');
       return data;
     } catch (e) {
       print(e);
@@ -113,7 +114,10 @@ class PlanService {
     }
   }
 
-  Future<UploadRes?> uploadImages(int id, List<ImageObject> images) async {
+  Future<UploadRes?> uploadImages(
+    int id,
+    List<ImageObject> images,
+  ) async {
     try {
       String? token = HttpHelper().getToken();
 
@@ -134,9 +138,7 @@ class PlanService {
         'http://116.193.191.117:8000/api/progressions/$id/upload',
         data: formData,
         options: Options(
-          contentType: "multipart/form-data",
           headers: {"Authorization": "Bearer $token"},
-          followRedirects: false,
         ),
       );
 

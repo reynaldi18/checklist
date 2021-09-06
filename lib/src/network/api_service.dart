@@ -3,7 +3,7 @@ import 'package:retrofit/http.dart';
 import 'package:si_jaja/src/helpers/http/http_helper.dart';
 import 'package:si_jaja/src/models/auth.dart';
 import 'package:si_jaja/src/models/dashboard.dart';
-import 'package:si_jaja/src/models/id.dart';
+import 'package:si_jaja/src/models/execution.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/models/user.dart';
 import 'package:si_jaja/src/network/responses/core_res.dart';
@@ -43,7 +43,7 @@ abstract class ApiService {
   Future<CoreRes<Dashboard>> getSummaries();
 
   @POST("/api/progressions/{id}")
-  Future<CoreRes<Id>> execution(
+  Future<CoreRes<Execution>> execution(
     @Path("id") int id,
     @Body() Map<String, dynamic> body,
   );

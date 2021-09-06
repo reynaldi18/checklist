@@ -8,6 +8,7 @@ part of 'execution.dart';
 
 Execution _$ExecutionFromJson(Map<String, dynamic> json) {
   return Execution(
+    id: json['id'] as int?,
     width: (json['width'] as num?)?.toDouble(),
     length: (json['length'] as num?)?.toDouble(),
     cost: (json['cost'] as num?)?.toDouble(),
@@ -22,6 +23,7 @@ Execution _$ExecutionFromJson(Map<String, dynamic> json) {
 }
 
 Map<String, dynamic> _$ExecutionToJson(Execution instance) => <String, dynamic>{
+      'id': instance.id,
       'width': instance.width,
       'length': instance.length,
       'cost': instance.cost,

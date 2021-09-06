@@ -66,48 +66,6 @@ class PlanViewModel extends FutureViewModel {
     notifyListeners();
   }
 
-  Future<void> loadAssets() async {
-    List<Asset> resultList = <Asset>[];
-
-    try {
-      resultList = await MultiImagePicker.pickImages(
-        maxImages: 300,
-        enableCamera: true,
-        selectedAssets: images,
-        cupertinoOptions: CupertinoOptions(
-          takePhotoIcon: "chat",
-          doneButtonTitle: "Fatto",
-        ),
-        materialOptions: MaterialOptions(
-          actionBarColor: "#abcdef",
-          actionBarTitle: Strings.labelApp,
-          allViewTitle: "All Photos",
-          useDetailsView: false,
-          selectCircleStrokeColor: "#000000",
-        ),
-      );
-    } on Exception catch (e) {
-      print(e);
-    }
-    resultList.asMap().forEach((key, value) {
-      print('Images: $value');
-    });
-    images = resultList;
-    encodeImage(images);
-    notifyListeners();
-  }
-
-  Future encodeImage(List<Asset> dataImages) async {
-    if (dataImages.length > 0) {
-      for (var i = 0; i < dataImages.length; i++) {
-        var fileImage =
-            File('${images[i].identifier}');
-        print('DATA: $fileImage');
-        addImages.add(fileImage);
-      }
-    }
-  }
-
   void validate() {
     roadWidthValidate = false;
     roadLengthValidate = false;
@@ -165,6 +123,7 @@ class PlanViewModel extends FutureViewModel {
         endDate ?? '',
         supervisorController.text,
       );
+      print('RESULT: ${result?.success}');
       if (result?.success == true) upload(result?.data?.id ?? 0);
       setBusy(false);
       return result;

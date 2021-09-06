@@ -13,7 +13,7 @@ class EmptyView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: screenHeightPercentage(context,
-          percentage: 0.6),
+          percentage: 0.5),
       child: Center(
         child: SvgPicture.asset(
           iconEmpty,

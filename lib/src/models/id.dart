@@ -7,7 +7,6 @@ class Id {
   @JsonKey(name: 'id')
   int? id;
 
-
   Id({
     this.id
   });
