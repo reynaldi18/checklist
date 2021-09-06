@@ -93,12 +93,12 @@ class PlanViewModel extends FutureViewModel {
     notifyListeners();
   }
 
-  Future upload(int executionId) async {
+  Future upload() async {
     final hasConnection = await ConnectionHelper.hasConnection();
 
     if (hasConnection) {
       setBusy(true);
-      var result = await _planService.uploadImages(executionId, imgObject);
+      var result = await _planService.uploadImages(id, imgObject);
       getPlan();
       setBusy(false);
       return result;
@@ -124,7 +124,7 @@ class PlanViewModel extends FutureViewModel {
         supervisorController.text,
       );
       print('RESULT: ${result?.success}');
-      if (result?.success == true) upload(result?.data?.id ?? 0);
+      if (result?.success == true) upload();
       setBusy(false);
       return result;
     } else
