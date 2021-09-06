@@ -43,8 +43,7 @@ class PlanViewModel extends FutureViewModel {
   String? endDate;
 
   List<Asset> images = <Asset>[];
-  List<File> imagesView = [];
-  List<String> addImages = [];
+  List<File> addImages = [];
 
   @override
   Future futureToRun() => getPlan();
@@ -92,6 +91,9 @@ class PlanViewModel extends FutureViewModel {
     } on Exception catch (e) {
       print(e);
     }
+    resultList.asMap().forEach((key, value) {
+      print('Images: $value');
+    });
     images = resultList;
     encodeImage(images);
     notifyListeners();
@@ -102,12 +104,12 @@ class PlanViewModel extends FutureViewModel {
       for (var i = 0; i < dataImages.length; i++) {
         final byteData = await images[i].getByteData();
         var fileImage =
-            File('${(await getTemporaryDirectory()).path}/${images[i].name}');
-        final file = await fileImage.writeAsBytes(byteData.buffer
-            .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
-        var base64Image = base64Encode(file.readAsBytesSync());
-        print('DATA: $base64Image');
-        addImages.add(base64Image);
+            File('${images[i].identifier}');
+        // final file = await fileImage.writeAsBytes(byteData.buffer
+        //     .asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+        // var base64Image = base64Encode(file.readAsBytesSync());
+        print('DATA: $fileImage');
+        addImages.add(fileImage);
       }
     }
   }
@@ -135,7 +137,20 @@ class PlanViewModel extends FutureViewModel {
       CustomToast.show(Strings.errorEmptyStartDate);
     else if (endDate == null)
       CustomToast.show(Strings.errorEmptyEndDate);
-    else execution();
+    else upload();
+    notifyListeners();
+  }
+  
+  Future upload() async {
+    final hasConnection = await ConnectionHelper.hasConnection();
+
+    if (hasConnection) {
+      setBusy(true);
+      var result = await _planService.uploadImages(id, addImages);
+      if (result?.success == true) execution();
+      return result;
+    }
+    else ConnectionHelper.showNotConnectionSnackBar();
     notifyListeners();
   }
 
@@ -154,7 +169,6 @@ class PlanViewModel extends FutureViewModel {
         startDate ?? '',
         endDate ?? '',
         supervisorController.text,
-        addImages,
       );
       getPlan();
       setBusy(false);

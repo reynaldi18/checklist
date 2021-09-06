@@ -97,7 +97,7 @@ class _HomeViewState extends State<HomeView> {
                                                                 SDP.sdp(4)),
                                                             Text(
                                                               Strings
-                                                                  .labelOnProgress,
+                                                                  .labelPlan,
                                                               style:
                                                               blackTextStyle
                                                                   .copyWith(

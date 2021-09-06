@@ -1,5 +1,9 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:logger/logger.dart';
+import 'package:si_jaja/src/helpers/http/http_helper.dart';
 import 'package:si_jaja/src/models/dashboard.dart';
 import 'package:si_jaja/src/models/plan.dart';
 import 'package:si_jaja/src/network/api_service.dart';
@@ -76,7 +80,6 @@ class PlanService {
     String startAt,
     String endAt,
     String supervisor,
-    List<String> images,
   ) async {
     try {
       final Map<String, dynamic> req = ExecutionReq(
@@ -88,7 +91,6 @@ class PlanService {
         startAt: startAt,
         endAt: endAt,
         supervisor: supervisor,
-        images: images,
       ).toJson();
       final data = await apiService.execution(id, req);
       return data;
@@ -107,6 +109,43 @@ class PlanService {
       });
       return data;
     } catch (e) {
+      print(e);
+    }
+  }
+
+  Future<CoreRes?> uploadImages(int id, List<File> images) async {
+    try{
+      String? token = HttpHelper().getToken();
+
+      Map<String, dynamic> bodyReq = {};
+
+      images.asMap().forEach((key, value) {
+        MultipartFile file = MultipartFile.fromFileSync(value.path);
+        bodyReq.addAll({'images[$key]': file});
+      });
+
+      print('REQ: $bodyReq');
+
+      FormData formData = FormData.fromMap(bodyReq);
+
+      var dio = Dio();
+      Response response = await dio.post(
+        'http://116.193.191.117:8000/api/progressions/$id/upload',
+        data: formData,
+        options: Options(
+          headers: {
+            "Authorization": "Bearer $token"
+          },
+        ),
+      );
+
+      var data = json.decode(response.toString());
+
+      CoreRes resp = CoreRes.fromJson(data, (json) => json as dynamic,);
+
+      return resp;
+    }
+    catch (e) {
       print(e);
     }
   }
