@@ -12,6 +12,7 @@ class Strings {
   static const String labelPlan = 'Perencanaan';
   static const String labelOnProgress = 'Pelaksanaan';
   static const String labelDone = 'Selesai';
+  static const String labelLogout = 'Keluar';
   static const String labelError = 'Terjadi kesalahan!';
   static const String labelMale = 'Laki-laki';
   static const String labelFemale = 'Perempuan';
@@ -28,6 +29,8 @@ class Strings {
   static const String labelSupervisor = 'Konsultan Pengawas';
   static const String labelImage = 'Foto';
   static const String labelInsertImage = 'Masukan Foto';
+  static const String labelProblem = 'Kendala';
+  static const String labelNotProblem = 'Tidak Ada Kendala';
 
   static const String hintEmail = 'Email';
   static const String hintPassword = 'Password';

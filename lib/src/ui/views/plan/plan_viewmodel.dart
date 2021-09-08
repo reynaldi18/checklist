@@ -28,6 +28,7 @@ class PlanViewModel extends FutureViewModel {
   final TextEditingController executorContactController =
       TextEditingController();
   final TextEditingController supervisorController = TextEditingController();
+  final TextEditingController problemController = TextEditingController();
   bool roadWidthValidate = false;
   bool roadLengthValidate = false;
   bool costValidate = false;
@@ -122,6 +123,7 @@ class PlanViewModel extends FutureViewModel {
         startDate ?? '',
         endDate ?? '',
         supervisorController.text,
+        problemController.text,
       );
       print('RESULT: ${result?.success}');
       if (result?.success == true) upload();

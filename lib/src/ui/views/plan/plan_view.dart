@@ -230,6 +230,11 @@ class _PlanViewState extends State<PlanView> {
                                     errorLabel: Strings.errorEmptySupervisor,
                                   ),
                                   verticalSpace(SDP.sdp(10)),
+                                  CustomTextField(
+                                    label: Strings.labelProblem,
+                                    controller: vm.problemController,
+                                  ),
+                                  verticalSpace(SDP.sdp(10)),
                                   ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
@@ -355,11 +360,11 @@ class _PlanViewState extends State<PlanView> {
                                       shrinkWrap: true,
                                       itemCount: vm.imgObject.length,
                                       gridDelegate:
-                                      const SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 4,
-                                          mainAxisSpacing: 2,
-                                          crossAxisSpacing: 2,
-                                          childAspectRatio: 1),
+                                          const SliverGridDelegateWithFixedCrossAxisCount(
+                                              crossAxisCount: 4,
+                                              mainAxisSpacing: 2,
+                                              crossAxisSpacing: 2,
+                                              childAspectRatio: 1),
                                       itemBuilder:
                                           (BuildContext context, int index) {
                                         var image = vm.imgObject[index];
@@ -374,16 +379,22 @@ class _PlanViewState extends State<PlanView> {
                                   TextButton(
                                     onPressed: () async {
                                       // Get max 5 images
-                                      List<ImageObject>? objects = await Navigator.of(context)
-                                          .push(PageRouteBuilder(pageBuilder: (context, animation, __) {
-                                        return const ImagePicker(maxCount: 5, isCaptureFirst: true);
+                                      List<ImageObject>? objects =
+                                          await Navigator.of(context).push(
+                                              PageRouteBuilder(pageBuilder:
+                                                  (context, animation, __) {
+                                        return const ImagePicker(
+                                            maxCount: 5, isCaptureFirst: true);
                                       }));
 
                                       if ((objects?.length ?? 0) > 0) {
                                         setState(() {
                                           vm.imgObject = objects!;
-                                          vm.imgObject.asMap().forEach((key, value) {
-                                            vm.addImages.add(File(value.originalPath));
+                                          vm.imgObject
+                                              .asMap()
+                                              .forEach((key, value) {
+                                            vm.addImages
+                                                .add(File(value.originalPath));
                                           });
                                         });
                                       }
@@ -560,6 +571,25 @@ class _PlanViewState extends State<PlanView> {
                                     overflow: TextOverflow.ellipsis,
                                     style: blackTextStyle.copyWith(
                                       fontSize: SDP.sdp(14),
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                  verticalSpace(SDP.sdp(10)),
+                                  Text(
+                                    Strings.labelProblem,
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: SDP.sdp(8),
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  verticalSpace(SDP.sdp(2)),
+                                  Text(
+                                    vm.plan?.execution?.problem ??
+                                        Strings.labelNotProblem,
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: blackTextStyle.copyWith(
+                                      fontSize: SDP.sdp(12),
                                       fontWeight: FontWeight.w400,
                                     ),
                                   ),

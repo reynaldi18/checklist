@@ -20,6 +20,8 @@ class ExecutionReq {
   String? endAt;
   @JsonKey(name: 'supervisor')
   String? supervisor;
+  @JsonKey(name: 'problem')
+  String? problem;
   @JsonKey(name: 'images')
   List<String>? images;
 
@@ -32,6 +34,7 @@ class ExecutionReq {
     this.startAt,
     this.endAt,
     this.supervisor,
+    this.problem,
     this.images,
   });
 

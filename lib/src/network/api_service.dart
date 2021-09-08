@@ -16,6 +16,7 @@ abstract class ApiService {
     String? token = HttpHelper().getToken();
     dio.options = BaseOptions(
       headers: {
+        'Accept': 'application/json',
         if (token != null) 'Authorization': 'Bearer $token',
       },
     );

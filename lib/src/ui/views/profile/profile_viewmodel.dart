@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:si_jaja/src/app/app.locator.dart';
 import 'package:si_jaja/src/app/app.router.dart';
+import 'package:si_jaja/src/helpers/storage/shared_preferences_manager.dart';
 import 'package:si_jaja/src/models/user.dart';
 import 'package:si_jaja/src/services/user_service.dart';
 import 'package:stacked/stacked.dart';
@@ -9,6 +10,8 @@ import 'package:stacked_services/stacked_services.dart';
 class ProfileViewModel extends FutureViewModel<User?> {
   final _navigationService = locator<NavigationService>();
   final _userService = locator<UserService>();
+  final SharedPreferencesManager _sharedPreferencesManager =
+      locator<SharedPreferencesManager>();
 
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -36,7 +39,7 @@ class ProfileViewModel extends FutureViewModel<User?> {
   }
 
   void signOut() {
-    // _authService.signOut();
+    _sharedPreferencesManager.clearAll();
     _navigationService.replaceWith(Routes.loginView);
   }
 }

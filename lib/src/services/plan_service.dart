@@ -82,6 +82,7 @@ class PlanService {
     String startAt,
     String endAt,
     String supervisor,
+    String problem,
   ) async {
     try {
       final Map<String, dynamic> req = ExecutionReq(
@@ -93,6 +94,7 @@ class PlanService {
           startAt: startAt,
           endAt: endAt,
           supervisor: supervisor,
+          problem: problem,
           images: []).toJson();
       final data = await apiService.execution(id, req);
       print('DATA: $data');

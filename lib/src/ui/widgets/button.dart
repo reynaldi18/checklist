@@ -9,6 +9,7 @@ class CustomButton extends StatelessWidget {
   final VoidCallback? onPress;
   final bool? disabled;
   final IconData? icon;
+  final bool logout;
 
   final double _elevation = 0;
 
@@ -18,6 +19,7 @@ class CustomButton extends StatelessWidget {
     this.onPress,
     this.disabled,
     this.icon,
+    this.logout = false,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,8 @@ class CustomButton extends StatelessWidget {
 
     Color backgroundColor = mainColor;
     Color textColor = white;
+
+    if (logout == true) backgroundColor = failed;
 
     return Container(
       width: screenWidth(context),

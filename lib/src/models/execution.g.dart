@@ -17,6 +17,7 @@ Execution _$ExecutionFromJson(Map<String, dynamic> json) {
     startAt: json['start_at'] as String?,
     endAt: json['end_at'] as String?,
     supervisor: json['supervisor'] as String?,
+    problem: json['problem'] as String?,
     images:
         (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
   );
@@ -32,5 +33,6 @@ Map<String, dynamic> _$ExecutionToJson(Execution instance) => <String, dynamic>{
       'start_at': instance.startAt,
       'end_at': instance.endAt,
       'supervisor': instance.supervisor,
+      'problem': instance.problem,
       'images': instance.images,
     };
