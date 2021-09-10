@@ -6,9 +6,8 @@ import 'package:si_jaja/src/ui/shared/dimens.dart';
 import 'package:si_jaja/src/ui/shared/images.dart';
 import 'package:si_jaja/src/ui/shared/strings.dart';
 import 'package:si_jaja/src/ui/shared/styles.dart';
-import 'package:si_jaja/src/ui/views/history/history_view.dart';
-import 'package:si_jaja/src/ui/views/home/home_view.dart';
-import 'package:si_jaja/src/ui/views/profile/profile_view.dart';
+import 'package:si_jaja/src/ui/views/blank_view.dart';
+import 'package:si_jaja/src/ui/views/checklist/checklist_view.dart';
 import 'package:stacked/stacked.dart';
 
 import 'main_viewmodel.dart';
@@ -120,13 +119,13 @@ class _MainViewState extends State<MainView> {
   Widget getViewForIndex(int index) {
     switch (index) {
       case 0:
-        return HomeView();
+        return ChecklistView();
       case 1:
-        return HistoryView();
+        return BlankView();
       case 2:
-        return ProfileView();
+        return BlankView();
       default:
-        return HomeView();
+        return BlankView();
     }
   }
 }

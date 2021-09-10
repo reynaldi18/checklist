@@ -10,15 +10,15 @@ import 'package:si_jaja/src/ui/widgets/button.dart';
 import 'package:si_jaja/src/ui/widgets/text_field.dart';
 import 'package:stacked/stacked.dart';
 
-import 'login_viewmodel.dart';
+import 'checklist_create_viewmodel.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({Key? key}) : super(key: key);
+class ChecklistCreateView extends StatelessWidget {
+  ChecklistCreateView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SDP.init(context);
-    return ViewModelBuilder<LoginViewModel>.reactive(
+    return ViewModelBuilder<ChecklistCreateViewModel>.reactive(
       builder: (context, vm, child) => Scaffold(
         body: SafeArea(
           child: Padding(
@@ -31,18 +31,10 @@ class LoginView extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     CustomTextField(
-                      label: Strings.hintUsername,
-                      controller: vm.usernameController,
-                      validate: vm.usernameValidate,
-                      errorLabel: Strings.errorEmptyUsername,
-                    ),
-                    verticalSpace(SDP.sdp(14)),
-                    CustomTextField(
-                      label: Strings.hintPassword,
-                      controller: vm.passwordController,
-                      validate: vm.passwordValidate,
-                      errorLabel: Strings.errorEmptyPassword,
-                      password: true,
+                      label: Strings.hintName,
+                      controller: vm.nameController,
+                      validate: vm.nameValidate,
+                      errorLabel: Strings.errorEmptyName,
                     ),
                     verticalSpace(SDP.sdp(24)),
                     vm.isBusy == true
@@ -51,21 +43,9 @@ class LoginView extends StatelessWidget {
                             color: mainColor,
                           )
                         : CustomButton(
-                            label: Strings.actionLogin.toUpperCase(),
-                            onPress: () {
-                              FocusScope.of(context).unfocus();
-                              vm.login();
-                            },
+                            label: Strings.actionCreateChecklist,
+                            onPress: () => vm.create(),
                           ),
-                    verticalSpace(SDP.sdp(24)),
-                    CustomButton(
-                      logout: true,
-                      label: Strings.actionRegis.toUpperCase(),
-                      onPress: () {
-                        FocusScope.of(context).unfocus();
-                        vm.regis();
-                      },
-                    ),
                   ],
                 ),
               ),
@@ -73,7 +53,7 @@ class LoginView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => LoginViewModel(),
+      viewModelBuilder: () => ChecklistCreateViewModel(),
     );
   }
 }

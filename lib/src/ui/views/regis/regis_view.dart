@@ -10,15 +10,15 @@ import 'package:si_jaja/src/ui/widgets/button.dart';
 import 'package:si_jaja/src/ui/widgets/text_field.dart';
 import 'package:stacked/stacked.dart';
 
-import 'login_viewmodel.dart';
+import 'regis_viewmodel.dart';
 
-class LoginView extends StatelessWidget {
-  LoginView({Key? key}) : super(key: key);
+class RegisView extends StatelessWidget {
+  RegisView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     SDP.init(context);
-    return ViewModelBuilder<LoginViewModel>.reactive(
+    return ViewModelBuilder<RegisViewModel>.reactive(
       builder: (context, vm, child) => Scaffold(
         body: SafeArea(
           child: Padding(
@@ -30,6 +30,13 @@ class LoginView extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    CustomTextField(
+                      label: Strings.hintEmail,
+                      controller: vm.emailController,
+                      validate: vm.emailValidate,
+                      errorLabel: Strings.errorEmptyEmail,
+                    ),
+                    verticalSpace(SDP.sdp(14)),
                     CustomTextField(
                       label: Strings.hintUsername,
                       controller: vm.usernameController,
@@ -51,21 +58,12 @@ class LoginView extends StatelessWidget {
                             color: mainColor,
                           )
                         : CustomButton(
-                            label: Strings.actionLogin.toUpperCase(),
+                            label: Strings.actionRegis.toUpperCase(),
                             onPress: () {
                               FocusScope.of(context).unfocus();
-                              vm.login();
+                              vm.regis();
                             },
                           ),
-                    verticalSpace(SDP.sdp(24)),
-                    CustomButton(
-                      logout: true,
-                      label: Strings.actionRegis.toUpperCase(),
-                      onPress: () {
-                        FocusScope.of(context).unfocus();
-                        vm.regis();
-                      },
-                    ),
                   ],
                 ),
               ),
@@ -73,7 +71,7 @@ class LoginView extends StatelessWidget {
           ),
         ),
       ),
-      viewModelBuilder: () => LoginViewModel(),
+      viewModelBuilder: () => RegisViewModel(),
     );
   }
 }

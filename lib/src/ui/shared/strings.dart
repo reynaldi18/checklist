@@ -34,6 +34,7 @@ class Strings {
   static const String labelPlanHasDone = 'Pelaksanaan Telah Selesai';
 
   static const String hintEmail = 'Email';
+  static const String hintUsername = 'Username';
   static const String hintPassword = 'Password';
   static const String hintSearchRoad = 'Cari nama jalan';
   static const String hintName = 'Nama';
@@ -42,11 +43,14 @@ class Strings {
   static const String hintBirthDate = 'Tanggal Lahir';
 
   static const String actionLogin = 'Masuk';
+  static const String actionRegis = 'Daftar';
+  static const String actionCreateChecklist = 'Buat Checklist';
   static const String actionContinue = 'Lanjutkan';
   static const String actionLoginGoogle = 'Google';
   static const String actionLoginFacebook = 'Facebook';
 
   static const String errorEmptyEmail = 'Harap masukan email!';
+  static const String errorEmptyUsername = 'Harap masukan username!';
   static const String errorEmptyPassword = 'Harap masukan password!';
   static const String errorEmptyName = 'Harap masukan nama!';
   static const String errorEmptyPhone = 'Harap masukan nomor telepon!';

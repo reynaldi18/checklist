@@ -1,24 +1,23 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:si_jaja/src/models/time.dart';
 
 part 'core_res.g.dart';
 
 @JsonSerializable(genericArgumentFactories: true)
 class CoreRes<T> {
-  @JsonKey(name: 'success')
-  bool? success;
+  @JsonKey(name: 'statusCode')
+  int? statusCode;
   @JsonKey(name: 'message')
   String? message;
   @JsonKey(name: 'data')
   T? data;
-  @JsonKey(name: 'time')
-  Time? time;
+  @JsonKey(name: 'errorMessage')
+  String? errorMessage;
 
   CoreRes({
-    this.success,
+    this.statusCode,
     this.message,
     this.data,
-    this.time,
+    this.errorMessage,
   });
 
   factory CoreRes.fromJson(

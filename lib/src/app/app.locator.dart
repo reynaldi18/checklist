@@ -10,7 +10,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked/stacked_annotations.dart';
 import 'package:stacked_services/stacked_services.dart';
 
-import '../services/plan_service.dart';
+import '../services/checklist_service.dart';
 import '../services/user_service.dart';
 
 final locator = StackedLocator.instance;
@@ -26,5 +26,5 @@ void setupLocator({String? environment, EnvironmentFilter? environmentFilter}) {
   locator.registerLazySingleton(() => BottomSheetService());
   locator.registerLazySingleton(() => SnackbarService());
   locator.registerLazySingleton(() => UserService());
-  locator.registerLazySingleton(() => PlanService());
+  locator.registerLazySingleton(() => ChecklistService());
 }
