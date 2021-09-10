@@ -31,6 +31,7 @@ class Strings {
   static const String labelInsertImage = 'Masukan Foto';
   static const String labelProblem = 'Kendala';
   static const String labelNotProblem = 'Tidak Ada Kendala';
+  static const String labelPlanHasDone = 'Pelaksanaan Telah Selesai';
 
   static const String hintEmail = 'Email';
   static const String hintPassword = 'Password';
